@@ -1,0 +1,27 @@
+$bright-peach: #FF4F60;
+$dark-navy: #17183B;
+
+html,
+body,
+#index-parent,
+#ui-view,
+.right-side,
+.left-side,
+.full-height-row {
+	height: 100%;
+	margin: 0;
+}
+
+// login and onboarding pages 
+.login-page {
+	text-align: center;
+	width: 20%;
+}
+
+.right-side {
+	background-color: $bright-peach;
+}
+
+.left-side {
+	background-color: $dark-navy;
+}

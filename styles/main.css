@@ -1,3 +1,21 @@
+html,
+body,
+#index-parent,
+#ui-view,
+.right-side,
+.left-side,
+.full-height-row {
+  height: 100%;
+  margin: 0; }
 
+.login-page {
+  text-align: center;
+  width: 20%; }
+
+.right-side {
+  background-color: #FF4F60; }
+
+.left-side {
+  background-color: #17183B; }
 
 /*# sourceMappingURL=main.css.map */
