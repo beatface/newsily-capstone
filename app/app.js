@@ -10,9 +10,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "app/partials/login.html",
       controller: "loginCtrl"
     })
+    .state('update-profile', {
+      url: "/update-profile",
+      templateUrl: "app/partials/update-profile.html",
+      controller: "loginCtrl"
+    })
     .state('create-or-join', {
       url: "/choose-group",
       templateUrl: "app/partials/create-or-join.html",
+      controller: "groupCtrl"
+    })
+    .state('add-members', {
+      url: "/add-members",
+      templateUrl: "app/partials/add-members.html",
       controller: "groupCtrl"
     });
 });

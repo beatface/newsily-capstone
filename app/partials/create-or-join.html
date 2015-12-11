@@ -1,16 +1,16 @@
-
+<!-- CONTROLLER: groupCtrl -->
 <div class="row full-height-row">
     <div class="col-md-6 right-side">
         <h1>You're at the crossroads...</h1>
         <div class="form-group">
             <label for "create-group">Create a group:</label>
-            <input type="email" class="form-control" id="create-group" placeholder="Email">
-            <button ng-click="create" class="btn btn-default">Create</button>
+            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Email">
+            <button ng-click="createGroup()" class="btn btn-default">Create</button>
         </div>
         <div class="form-group">
             <label for "join-group">Join a group:</label>
-            <input type="email" class="form-control" id="join-group" placeholder="Email">
-            <button ng-model="join_group_btn" class="btn btn-default">Join</button>
+            <input type="text" class="form-control" id="join-group" ng-model="join_group_name" placeholder="Email">
+            <button ng-click="joinGroup()" class="btn btn-default">Join</button>
         </div>
     </div>
     <div class="col-md-6 left-side">

@@ -1,15 +1,14 @@
 
-app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", 
-	function($scope, $firebaseAuth, $state) {
+app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject",
+	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject) {
 		console.log("login js");
 
-	// existing user login
+	// ------- EXISTING USER LOGIN ------- //
 	$scope.login = function() {
 		var userObj = {
 			email: $scope.user_email,
 			password: $scope.user_password
 		};
-
 		$scope.$parent.ref.$authWithPassword(userObj)
 		.then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
@@ -19,15 +18,14 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state",
 		});
 	};
 
-	// register new user through email
+
+	// ------- REGISTER NEW USER THROUGH EMAIL ------- //
 	$scope.registerUser = function() {
 		console.log("you clicked register");
 		var userObj = {
 			email: $scope.user_email,
 			password: $scope.user_password
 		};
-		console.log("userObj", userObj);
-
 		$scope.$parent.ref.$createUser(userObj)
 		.then(function(userData) {
 		  console.log("User " + userData.uid + " created successfully!");
@@ -40,15 +38,31 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state",
 		});
 	};
 
-	// register new user with facebook
+
+	// ------- REGISTER NEW USER THROUGH FACEBOOK ------- //
 	$scope.facebookRegister = function() {
 		$scope.$parent.ref.$authWithOAuthPopup("facebook")
 		.then(function(authData) {
 		  	console.log("Logged in with Facebook as:", authData.uid);
-		  	$state.go('create-or-join');
+		  	$scope.$parent.userAuthData.uid = authData.uid;
+		  	$state.go('update-profile');
 		}).catch(function(error) {
-		 	 console.error("Authentication failed:", error);
+		 	console.error("Authentication failed:", error);
 		});
+	};
+
+
+	// ------- SAVE PROFILE INFO ------- //
+	$scope.saveProfile = function() {
+		console.log("you clicked save");
+		var ref = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid);
+		ref = $firebaseObject(ref);
+		ref.email = $scope.addemail;
+		ref.name = $scope.firstname;
+		ref.$save().then(function () {
+            console.log(ref);
+            $state.go('create-or-join');
+        });
 	};
 
 
