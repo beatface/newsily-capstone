@@ -12,7 +12,7 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		$scope.$parent.ref.$authWithPassword(userObj)
 		.then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
-		  // $state.go("main-page.content");
+		  $state.go("newsily-main");
 		}).catch(function(error) {
 		  console.error("Error: ", error);
 		});
@@ -32,6 +32,7 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		  return $scope.ref.$authWithPassword(userObj);
 		}).then(function(authData) {
 		  console.log("Logged in with email as:", authData.uid);
+		  $scope.$parent.userAuthData = authData;
 		  $state.go('create-or-join');
 		}).catch(function(error) {
 		  console.error("Error: ", error);

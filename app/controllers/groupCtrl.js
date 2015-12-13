@@ -19,14 +19,13 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 	$scope.createGroup = function() {
 		$scope.groupObj = {
 			groupname: $scope.newGroupName,
-			members: [$scope.$parent.userAuthData.uid]
+			members: [$scope.$parent.userAuthData.password.email]
 		};
 		console.log("groupObj", $scope.groupObj);
 		ref.$add($scope.groupObj)
 		.then(function(newRef) {
 			groupId.setGroupId(newRef.key());
 			console.log("added group's key is ", $scope.groupId);
-
 			$state.go("add-members");
 		});
 	};
@@ -39,7 +38,6 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		// -- new firebase reference at groups location
 		var ref = new Firebase("https://newsily.firebaseio.com/groups/" + group);
 		console.log("ref >>>>>>>>", ref);
-
 		$scope.addedMembers = [$scope.addMember1, $scope.addMember2, $scope.addMember3];
 
 		$scope.addedMembers.forEach(function(element) {
@@ -47,11 +45,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 				ref.child('members').push(element);
 			}
 		});
-
-		// ref.child('members').push($scope.addMember2);
-
-		// console.log("added", $scope.addedMembers);
-
+		$state.go("newsily-main");
 	};
 
 	$scope.joinGroup = function() {

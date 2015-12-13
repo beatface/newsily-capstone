@@ -1,5 +1,6 @@
 $bright-peach: #FF4F60;
 $dark-navy: #17183B;
+$light-peach: #FBC6A2;
 
 html,
 body,
@@ -7,7 +8,9 @@ body,
 #ui-view,
 .right-side,
 .left-side,
-.full-height-row {
+.full-height-row,
+.fixed-sidebar,
+.posts-div {
 	height: 100%;
 	margin: 0;
 }
@@ -15,13 +18,21 @@ body,
 // login and onboarding pages 
 .login-page {
 	text-align: center;
-	width: 20%;
 }
 
 .right-side {
 	background-color: $bright-peach;
 }
 
-.left-side {
+.left-side,
+.fixed-sidebar {
 	background-color: $dark-navy;
+}
+
+.posts-div {
+	background-color: $light-peach;
+}
+
+.fixed-sidebar {
+	color: $light-peach;
 }

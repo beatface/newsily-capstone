@@ -4,18 +4,26 @@ body,
 #ui-view,
 .right-side,
 .left-side,
-.full-height-row {
+.full-height-row,
+.fixed-sidebar,
+.posts-div {
   height: 100%;
   margin: 0; }
 
 .login-page {
-  text-align: center;
-  width: 20%; }
+  text-align: center; }
 
 .right-side {
   background-color: #FF4F60; }
 
-.left-side {
+.left-side,
+.fixed-sidebar {
   background-color: #17183B; }
+
+.posts-div {
+  background-color: #FBC6A2; }
+
+.fixed-sidebar {
+  color: #FBC6A2; }
 
 /*# sourceMappingURL=main.css.map */
