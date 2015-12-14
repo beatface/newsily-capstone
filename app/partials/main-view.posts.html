@@ -1,23 +1,23 @@
 <div id="wrapper">
 	<div id="columns">
-		<div class="pin" ng-repeat="pins in allpins">
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{{pins.$id}}">
-				<img src="{{pins.images[0].url}}" />
+		<div class="pin" ng-repeat="post in posts">
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{{post.$id}}">
+				<img src="{{post.images[0].url}}" />
 			</button>
-			<h6>{{pins.title}}</h6>
-			<p>{{pins.description}}</p>
+			<h6>{{post.title}}</h6>
+			<p>{{post.description}}</p>
 			<!-- Modal -->
-			<div class="modal fade" id="{{pins.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			      	<button type="button" class="btn btn-primary favorites-btn" ng-click="uploadFavsPin(pins)">Pin It</button>
+			      	<button type="button" class="btn btn-primary favorites-btn" ng-click="uploadFavsPin(post)">Pin It</button>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">{{pins.title}}</h4>
+			        <h4 class="modal-title" id="myModalLabel">{{post.title}}</h4>
 			      </div>
 			      <div class="modal-body">
-			        <img class="modal-pic" ng-src="{{ pins.images[0].url }}">
-			        <h5>{{pins.description}}</h5>
+			        <img class="modal-pic" ng-src="{{ post.images[0].url }}">
+			        <h5>{{post.description}}</h5>
 			      </div>
 			      <div class="modal-footer">
 			      </div>

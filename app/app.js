@@ -29,5 +29,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: "/newsily-main",
       templateUrl: "app/partials/main-view.html",
       controller: "mainAppCtrl"
+    })
+    .state('newsily-main.posts', {
+      url: "/newsily-main-posts",
+      templateUrl: "app/partials/main-view.posts.html",
+      controller: "mainAppCtrl"
     });
 });

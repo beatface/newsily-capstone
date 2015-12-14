@@ -14,7 +14,7 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		$scope.$parent.ref.$authWithPassword(userObj)
 		.then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
-		  $state.go("newsily-main");
+		  $state.go("newsily-main.posts");
 		}).catch(function(error) {
 		  console.error("Error: ", error);
 		});
