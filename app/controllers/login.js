@@ -3,6 +3,8 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject) {
 		console.log("login js");
 
+	$scope.user_email = "";
+
 	// ------- EXISTING USER LOGIN ------- //
 	$scope.login = function() {
 		var userObj = {
@@ -26,13 +28,18 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 			email: $scope.user_email,
 			password: $scope.user_password
 		};
+		// create user
 		$scope.$parent.ref.$createUser(userObj)
 		.then(function(userData) {
 		  console.log("User " + userData.uid + " created successfully!");
+		  // log user in
 		  return $scope.ref.$authWithPassword(userObj);
 		}).then(function(authData) {
 		  console.log("Logged in with email as:", authData.uid);
+		  // assign user data to parent scope for easy access from other controllers
 		  $scope.$parent.userAuthData = authData;
+		  // add user data to firebase
+		  $scope.saveProfile();
 		  $state.go('create-or-join');
 		}).catch(function(error) {
 		  console.error("Error: ", error);
@@ -58,11 +65,10 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		console.log("you clicked save");
 		var ref = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid);
 		ref = $firebaseObject(ref);
-		ref.email = $scope.addemail;
-		ref.name = $scope.firstname;
+		ref.email = $scope.user_email;
 		ref.$save().then(function () {
             console.log(ref);
-            $state.go('create-or-join');
+            // $state.go('create-or-join');
         });
 	};
 

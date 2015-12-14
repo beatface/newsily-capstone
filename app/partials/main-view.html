@@ -1,14 +1,30 @@
 <div class="row full-height-row">
 	<!-- FIXED SIDEBAR -->
 	<div class="col-md-2 fixed-sidebar">
-
-		<p>this is a sidebar</p>
+		<button ng-click="addPost()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                   
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+            </ul>
+        </div>
+		<button id="logoutbtn">Logout</button>
+		<button id="newgroupbtn">New group</button>
 	</div>
+
 	<!-- POSTS CONTAINER -->
 	<div class="col-md-10 posts-div">
-
-		<p>this is a main div</p>
-
+		<div ui-view></div>
 	</div>
 
 </div>

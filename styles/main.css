@@ -21,9 +21,44 @@ body,
   background-color: #17183B; }
 
 .posts-div {
-  background-color: #FBC6A2; }
+  background-color: #fdece1; }
 
 .fixed-sidebar {
-  color: #FBC6A2; }
+  color: #FBC6A2;
+  padding: 0; }
+
+#newgroupbtn,
+#logoutbtn {
+  position: absolute;
+  bottom: 8px; }
+
+#newgroupbtn {
+  right: 13px; }
+
+/* Sidebar Styles */
+.sidebar-nav {
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px; }
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999; }
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2); }
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none; }
 
 /*# sourceMappingURL=main.css.map */
