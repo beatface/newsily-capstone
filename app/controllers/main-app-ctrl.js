@@ -9,12 +9,12 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	$scope.posts = postsRef;
 
 	var currentUser = currentUserData.getUserData();
+	console.log("currentUser", currentUser.auth.uid);
 
 	// for loading group names into sidebar menu
-	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
-	$scope.userGroups = $firebaseArray(userGroupsRef);
-	console.log("userGroupsRef", $scope.userGroups);
-
+	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.auth.uid + "/joined_groups");
+	userGroupsRef = $firebaseArray(userGroupsRef);
+	$scope.userGroups = userGroupsRef;
 
 	// Add post to group page
 	$scope.addPost = function() {

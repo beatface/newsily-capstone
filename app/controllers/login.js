@@ -4,8 +4,8 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		console.log("login js");
 
 	$scope.user_email = "";
+	$scope.user_password = "";
 
-	var currentUser = currentUserData.getUserData();
 	var ref = new Firebase("https://newsily.firebaseio.com/users");
 	ref = $firebaseAuth(ref);
 
@@ -24,7 +24,6 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		  // getting user's joined groups and setting group factory with first group in the array
 		  userGroups.once("value", function(snapshot) {
 		  	var groups = snapshot.val();
-		  	console.log("user groups", groups[0]);
 			groupId.setGroupId(groups[0]);
 		  });
 		  $state.go("newsily-main.posts");
@@ -77,6 +76,7 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 	// ------- SAVE PROFILE INFO ------- //
 	$scope.saveProfile = function() {
 		console.log("you clicked save");
+		var currentUser = currentUserData.getUserData();
 		var ref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid);
 		ref = $firebaseObject(ref);
 		ref.email = $scope.user_email;

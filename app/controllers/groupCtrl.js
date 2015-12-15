@@ -1,30 +1,25 @@
 
 app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObject", "groupId", "currentUserData",
 	function($scope, $state, $firebaseArray, $firebaseObject, groupId, currentUserData) {
-	console.log("loaded groupCtrl");
 	
-
 	$scope.newGroupName = "";
-	$scope.groupObj = "";
 	$scope.groupId = "";
 
 	// -- new firebase reference at groups location
 	var ref = new Firebase("https://newsily.firebaseio.com/groups");
 	ref = $firebaseArray(ref);
-	console.log("ref", ref);
-	console.log("you clicked 'Create a group'!");
 
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser", currentUser);
 
 	// -- Creates brand new group
 	$scope.createGroup = function() {
-		$scope.groupObj = {
+		var groupObj = {
 			groupname: $scope.newGroupName,
 			members: [currentUser.password.email]
 		};
-		console.log("groupObj", $scope.groupObj);
-		ref.$add($scope.groupObj)
+		console.log("groupObj", groupObj);
+		ref.$add(groupObj)
 		.then(function(newRef) {
 			// sets created group id to factory for access from add members iteration of this controller
 			groupId.setGroupId(newRef.key());
@@ -36,7 +31,6 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			$state.go("add-members");
 		});
 	};
-
 
 
 	// -- Adds members to newly created group
@@ -52,7 +46,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 				ref.child('members').push(element);
 			}
 		});
-		$state.go("newsily-main");
+		$state.go("newsily-main.posts");
 	};
 
 	$scope.joinGroup = function() {
