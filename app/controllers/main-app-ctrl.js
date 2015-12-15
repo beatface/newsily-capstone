@@ -1,6 +1,6 @@
 
-app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "groupId",
-	function($scope, $state, $firebaseArray, $http, groupId) {
+app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "groupId", "currentUserData",
+	function($scope, $state, $firebaseArray, $http, groupId, currentUserData) {
 		console.log("main app ctrl");
 
 	var postsRef = new Firebase("https://newsily.firebaseio.com/posts");
@@ -8,7 +8,10 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	postsRef = $firebaseArray(postsRef);
 	$scope.posts = postsRef;
 
-	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid + "/joined_groups");
+	var currentUser = currentUserData.getUserData();
+
+	// for loading group names into sidebar menu
+	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 	$scope.userGroups = $firebaseArray(userGroupsRef);
 	console.log("userGroupsRef", $scope.userGroups);
 
@@ -33,10 +36,6 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 			postsRef.$add(dataForFirebase)
 			.then(function(refinfo) {
 				console.log("refinfo", refinfo);
-				// pinsRef.$add(dataForFirebase)
-				// .then(function(pinsinfo) {
-				// 	console.log("pinsinfo", pinsinfo);
-				// });
 			});
 		});
 	};
@@ -46,14 +45,14 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		// console.log("event target >>> ", event.target);
 		if ($(event.target).hasClass("viewModal")) {
 			console.log("you clicked on a .viewModal element");
-			var myframe = document.getElementById("modaliFrame");
-			if(myframe !== null) {
-				if(myframe.src) {
-					myframe.src = event.target.id; 
-				} else if(myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
-					myframe.contentWindow.location = event.target.id; 
+			var modalframe = document.getElementById("modaliFrame");
+			if(modalframe !== null) {
+				if(modalframe.src) {
+					modalframe.src = event.target.id; 
+				} else if(modalframe.contentWindow !== null && modalframe.contentWindow.location !== null) {
+					modalframe.contentWindow.location = event.target.id; 
 				} else{ 
-					myframe.setAttribute('src', event.target.id); 
+					modalframe.setAttribute('src', event.target.id); 
 				}
 			}
 		}
@@ -61,7 +60,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 	//logout button
 	$scope.logout = function() {
-		$scope.$parent.ref.$unauth();
+		userGroupsRef.unauth();
 		$state.go("login");
 	};
 

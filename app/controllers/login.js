@@ -1,9 +1,14 @@
 
-app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject", "groupId",
-	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject, groupId) {
+app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject", "groupId", "currentUserData",
+	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject, groupId, currentUserData) {
 		console.log("login js");
 
 	$scope.user_email = "";
+
+	var currentUser = currentUserData.getUserData();
+	var ref = new Firebase("https://newsily.firebaseio.com/users");
+	ref = $firebaseAuth(ref);
+
 
 	// ------- EXISTING USER LOGIN ------- //
 	$scope.login = function() {
@@ -11,7 +16,8 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 			email: $scope.user_email,
 			password: $scope.user_password
 		};
-		$scope.$parent.ref.$authWithPassword(userObj)
+		
+		ref.$authWithPassword(userObj)
 		.then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
 		  var userGroups = new Firebase("https://newsily.firebaseio.com/users/" + authData.uid + "/joined_groups");
@@ -36,15 +42,16 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 			password: $scope.user_password
 		};
 		// create user
-		$scope.$parent.ref.$createUser(userObj)
+		ref.$createUser(userObj)
 		.then(function(userData) {
 		  console.log("User " + userData.uid + " created successfully!");
 		  // log user in
-		  return $scope.ref.$authWithPassword(userObj);
+		  return ref.$authWithPassword(userObj);
 		}).then(function(authData) {
+		  currentUserData.setUserData(authData);
 		  console.log("Logged in with email as:", authData.uid);
-		  // assign user data to parent scope for easy access from other controllers
-		  $scope.$parent.userAuthData = authData;
+		})
+		.then(function() {
 		  // add user data to firebase
 		  $scope.saveProfile();
 		  $state.go('create-or-join');
@@ -54,23 +61,23 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 	};
 
 
-	// ------- REGISTER NEW USER THROUGH FACEBOOK ------- //
-	$scope.facebookRegister = function() {
-		$scope.$parent.ref.$authWithOAuthPopup("facebook")
-		.then(function(authData) {
-		  	console.log("Logged in with Facebook as:", authData.uid);
-		  	$scope.$parent.userAuthData.uid = authData.uid;
-		  	$state.go('update-profile');
-		}).catch(function(error) {
-		 	console.error("Authentication failed:", error);
-		});
-	};
+	// // ------- REGISTER NEW USER THROUGH FACEBOOK ------- //
+	// $scope.facebookRegister = function() {
+	// 	ref.$authWithOAuthPopup("facebook")
+	// 	.then(function(authData) {
+	// 	  	console.log("Logged in with Facebook as:", authData.uid);
+	// 	  	$scope.$parent.$parent.userAuthData.uid = authData.uid;
+	// 	  	$state.go('update-profile');
+	// 	}).catch(function(error) {
+	// 	 	console.error("Authentication failed:", error);
+	// 	});
+	// };
 
 
 	// ------- SAVE PROFILE INFO ------- //
 	$scope.saveProfile = function() {
 		console.log("you clicked save");
-		var ref = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid);
+		var ref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid);
 		ref = $firebaseObject(ref);
 		ref.email = $scope.user_email;
 		ref.$save().then(function () {

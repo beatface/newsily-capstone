@@ -1,6 +1,6 @@
 
-app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObject", "groupId",
-	function($scope, $state, $firebaseArray, $firebaseObject, groupId) {
+app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObject", "groupId", "currentUserData",
+	function($scope, $state, $firebaseArray, $firebaseObject, groupId, currentUserData) {
 	console.log("loaded groupCtrl");
 	
 
@@ -14,12 +14,14 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 	console.log("ref", ref);
 	console.log("you clicked 'Create a group'!");
 
+	var currentUser = currentUserData.getUserData();
+	console.log("currentUser", currentUser);
 
 	// -- Creates brand new group
 	$scope.createGroup = function() {
 		$scope.groupObj = {
 			groupname: $scope.newGroupName,
-			members: [$scope.$parent.userAuthData.password.email]
+			members: [currentUser.password.email]
 		};
 		console.log("groupObj", $scope.groupObj);
 		ref.$add($scope.groupObj)
@@ -27,7 +29,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			// sets created group id to factory for access from add members iteration of this controller
 			groupId.setGroupId(newRef.key());
 			// adds group to user's joined-groups key
-			var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid + "/joined_groups");
+			var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 			// joinedref = $firebaseArray(joinedref);
 			joinedref.set([newRef.key()]);
 			console.log("added group's key is ", $scope.groupId);
