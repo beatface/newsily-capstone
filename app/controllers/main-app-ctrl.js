@@ -5,11 +5,12 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 	var postsRef = new Firebase("https://newsily.firebaseio.com/posts");
 	// setting all posts variable on the scope for loading into partial
-	$scope.posts = $firebaseArray(postsRef);
+	postsRef = $firebaseArray(postsRef);
+	$scope.posts = postsRef;
 
 	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid + "/joined_groups");
 	$scope.userGroups = $firebaseArray(userGroupsRef);
-	console.log("userGroupsRef", $scope.userGroupsRef);
+	console.log("userGroupsRef", $scope.userGroups);
 
 
 	// Add post to group page

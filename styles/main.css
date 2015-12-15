@@ -140,6 +140,9 @@ iframe#modaliFrame {
   width: 100%;
   height: 100%; }
 
+div.modal-body {
+  border: 12px solid #7B7554; }
+
 iframe#modaliFrame {
   border: none; }
 

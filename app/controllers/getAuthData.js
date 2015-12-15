@@ -1,6 +1,6 @@
 
-app.controller("getAuthData", ["$scope", "$firebaseAuth", "$state", 
-	function($scope, $firebaseAuth, $state) {
+app.controller("getAuthData", ["$scope", "$firebaseAuth", "$state", "groupId",
+	function($scope, $firebaseAuth, $state, groupId) {
 
 	console.log("get auth data");
 
@@ -19,6 +19,13 @@ app.controller("getAuthData", ["$scope", "$firebaseAuth", "$state",
 
 	if (authData) {
 	  console.log("Logged in as:", authData.uid);
+	  var userGroups = new Firebase("https://newsily.firebaseio.com/users/" + authData.uid + "/joined_groups");
+		  // getting user's joined groups and setting group factory with first group in the array
+		  userGroups.once("value", function(snapshot) {
+		  	var groups = snapshot.val();
+		  	console.log("user groups", groups[0]);
+			groupId.setGroupId(groups[0]);
+		  });
 	  // $state.go('');
 	} else {
 	  console.log("Logged out");

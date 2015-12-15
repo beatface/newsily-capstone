@@ -1,6 +1,7 @@
 $bright-peach: #FF4F60;
 $dark-navy: #17183B;
 $light-peach: #FBC6A2;
+$army-green: #7B7554;
 
 html,
 body,
@@ -182,6 +183,10 @@ div.modal-body,
 iframe#modaliFrame {
     width: 100%;
     height: 100%;
+}
+
+div.modal-body {
+    border: 12px solid $army-green;
 }
 
 iframe#modaliFrame {
