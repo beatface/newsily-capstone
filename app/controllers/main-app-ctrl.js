@@ -4,10 +4,13 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		console.log("main app ctrl");
 
 	var postsRef = new Firebase("https://newsily.firebaseio.com/posts");
-	postsRef = $firebaseArray(postsRef);
-
 	// setting all posts variable on the scope for loading into partial
-	$scope.posts = postsRef;
+	$scope.posts = $firebaseArray(postsRef);
+
+	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid + "/joined_groups");
+	$scope.userGroups = $firebaseArray(userGroupsRef);
+	console.log("userGroupsRef", $scope.userGroupsRef);
+
 
 	// Add post to group page
 	$scope.addPost = function() {
@@ -38,23 +41,37 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	};
 
 	// setting iframe source for modal on click
-	$('body').click('.viewModal', function(event) {
-		console.log("event target", event.target);
-		
-		console.log("id url", event.target.id);	
-
-		var myframe = document.getElementById("modaliFrame");
-		if(myframe !== null) {
-			if(myframe.src) {
-				myframe.src = event.target.id; 
-			} else if(myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
-				myframe.contentWindow.location = event.target.id; 
-			} else{ 
-				myframe.setAttribute('src', event.target.id); 
+	$('body').click(function(event) {
+		// console.log("event target >>> ", event.target);
+		if ($(event.target).hasClass("viewModal")) {
+			console.log("you clicked on a .viewModal element");
+			var myframe = document.getElementById("modaliFrame");
+			if(myframe !== null) {
+				if(myframe.src) {
+					myframe.src = event.target.id; 
+				} else if(myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+					myframe.contentWindow.location = event.target.id; 
+				} else{ 
+					myframe.setAttribute('src', event.target.id); 
+				}
 			}
 		}
 	});
 
+	//logout button
+	$scope.logout = function() {
+		$scope.$parent.ref.$unauth();
+		$state.go("login");
+	};
+
 
 
 }]); // end app controller
+
+
+
+
+
+
+
+

@@ -2,12 +2,12 @@
 	<div id="columns">
 		<div class="pin" ng-repeat="post in posts">
 			<button type="button" class="viewModal btn btn-primary btn-lg" data-toggle="modal" data-target="#iframe">
-				<img src="{{post.images[0].url}}" id="{{post.url}}"/>
+				<img src="{{post.images[0].url}}" id="{{post.url}}" class="viewModal"/>
 			</button>
 			<h6>{{post.title}}</h6>
 			<p>{{post.description}}</p>
-			<!-- Modal -->
 		</div>
+			<!-- Modal -->
 			<div class="modal fade" id="iframe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			  	<div class="modal-dialog" role="document">
