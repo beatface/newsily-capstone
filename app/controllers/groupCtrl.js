@@ -29,7 +29,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			// adds group to user's joined-groups key
 			var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + $scope.$parent.userAuthData.uid + "/joined_groups");
 			// joinedref = $firebaseArray(joinedref);
-			joinedref.set([$scope.newGroupName]);
+			joinedref.set([newRef.key()]);
 			console.log("added group's key is ", $scope.groupId);
 			$state.go("add-members");
 		});

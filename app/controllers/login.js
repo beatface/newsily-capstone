@@ -1,6 +1,6 @@
 
-app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject",
-	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject) {
+app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject", "groupId",
+	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject, groupId) {
 		console.log("login js");
 
 	$scope.user_email = "";
@@ -14,6 +14,13 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		$scope.$parent.ref.$authWithPassword(userObj)
 		.then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
+		  var userGroups = new Firebase("https://newsily.firebaseio.com/users/" + authData.uid + "/joined_groups");
+		  // getting user's joined groups and setting group factory with first group in the array
+		  userGroups.once("value", function(snapshot) {
+		  	var groups = snapshot.val();
+		  	console.log("user groups", groups[0]);
+			groupId.setGroupId(groups[0]);
+		  });
 		  $state.go("newsily-main.posts");
 		}).catch(function(error) {
 		  console.error("Error: ", error);

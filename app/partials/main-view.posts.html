@@ -1,16 +1,23 @@
 <div id="wrapper">
 	<div id="columns">
 		<div class="pin" ng-repeat="post in posts">
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{{post.$id}}">
-				<img src="{{post.images[0].url}}" />
+			<button type="button" class="viewModal btn btn-primary btn-lg" data-toggle="modal" data-target="#iframe">
+				<img src="{{post.images[0].url}}" id="{{post.url}}"/>
 			</button>
 			<h6>{{post.title}}</h6>
 			<p>{{post.description}}</p>
 			<!-- Modal -->
-			<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
+		</div>
+			<div class="modal fade" id="iframe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  	<div class="modal-dialog" role="document">
+			    	<div class="modal-content">
+				     	<div class="modal-body">
+					    	<iframe src="" id="modaliFrame"></iframe>
+					    </div>
+
+
+			      <!-- <div class="modal-header">
 			      	<button type="button" class="btn btn-primary favorites-btn" ng-click="uploadFavsPin(post)">Pin It</button>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title" id="myModalLabel">{{post.title}}</h4>
@@ -20,10 +27,9 @@
 			        <h5>{{post.description}}</h5>
 			      </div>
 			      <div class="modal-footer">
-			      </div>
+			      </div> -->
+			   		</div>
 			    </div>
-			  </div>
 			</div>
-		</div>
 	</div>
 </div>

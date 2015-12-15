@@ -9,10 +9,6 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// setting all posts variable on the scope for loading into partial
 	$scope.posts = postsRef;
 
-	$(document).ready(function(){
-    	$('[data-toggle="popover"]').popover(); 
-	});
-
 	// Add post to group page
 	$scope.addPost = function() {
 		console.log("you clicked add post");
@@ -38,11 +34,26 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 				// 	console.log("pinsinfo", pinsinfo);
 				// });
 			});
-
 		});
-
 	};
 
+	// setting iframe source for modal on click
+	$('body').click('.viewModal', function(event) {
+		console.log("event target", event.target);
+		
+		console.log("id url", event.target.id);	
+
+		var myframe = document.getElementById("modaliFrame");
+		if(myframe !== null) {
+			if(myframe.src) {
+				myframe.src = event.target.id; 
+			} else if(myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+				myframe.contentWindow.location = event.target.id; 
+			} else{ 
+				myframe.setAttribute('src', event.target.id); 
+			}
+		}
+	});
 
 
 
