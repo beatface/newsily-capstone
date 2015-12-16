@@ -12,6 +12,8 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser", currentUser);
 
+	var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
+
 	// -- Creates brand new group
 	$scope.createGroup = function() {
 		var groupObj = {
@@ -24,7 +26,6 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			// sets created group id to factory for access from add members iteration of this controller
 			groupId.setGroupId(newRef.key());
 			// adds group to user's joined-groups key
-			var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 			// joinedref = $firebaseArray(joinedref);
 			joinedref.set([newRef.key()]);
 			console.log("added group's key is ", $scope.groupId);
@@ -40,7 +41,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		var groupref = new Firebase("https://newsily.firebaseio.com/groups/" + group);
 		console.log("groupref >>>>>>>>", groupref);
 		$scope.addedMembers = [$scope.addMember1, $scope.addMember2, $scope.addMember3];
-
+		// loop through added members and push to members in firebase 
 		$scope.addedMembers.forEach(function(element) {
 			if (element) {
 				groupref.child('members').push(element);
@@ -49,15 +50,29 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		$state.go("newsily-main.posts");
 	};
 
+	// -- Join an existing from from create-or-join onboarding view 
 	$scope.joinGroup = function() {
+
 		ref.orderByChild("groupname").equalTo($scope.joinGroupName).on('value', function(snapshot) {
 			console.log("snapshot", snapshot.val());
 			var matched_group = snapshot.val();
+			// check that group exists
 			if ( matched_group !== null && matched_group !== undefined ) {
-				var obj = _.findKey(matched_group, 'members');	
-				obj = matched_group[obj];
+				// get group's key
+				var key = _.findKey(matched_group, 'members');	
+				// move one level down in object
+				var obj = matched_group[key];
+				// target members on group to join
 				for (var member in obj.members) {
 					console.log("this member", obj.members[member]);
+					// find if current user matches authorized group members
+					if ( obj.members[member] === currentUser.password.email ) {
+						console.log("this group matches", obj.members[member], "--", currentUser.password.email);
+						// push joined group key to user's joined_groups
+						joinedref.push(key);
+						//reroute to main view
+						$state.go('newsily-main.posts');
+					}
 				}
 			} //end if
 			

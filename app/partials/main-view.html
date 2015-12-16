@@ -24,8 +24,10 @@
 	    </div>
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li ng-repeat="group in userGroups">
-                    <a href="#">{{group.$value}}</a>
+                <li ng-repeat="group in allGroups">
+                	<div ng-repeat=" usergroup in usersGroups | filterBy: ['$value']:group.$id">
+                    <input type="radio" name="groups" value="{{group.$id}}">{{group.groupname}}
+	                </div>
                 </li>
             </ul>
         </div>

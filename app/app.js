@@ -1,4 +1,4 @@
-var app = angular.module("NewsilyApp", ["ui.bootstrap", "firebase", "ui.router"]);
+var app = angular.module("NewsilyApp", ["ui.bootstrap", "firebase", "ui.router", "angular.filter"]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -53,8 +53,11 @@ function auth($firebaseAuth, $state, groupId, currentUserData) {
         // getting user's joined groups and setting group factory with first group in the array
         userGroups.once("value", function(snapshot) {
             var groups = snapshot.val();
-            console.log("user groups", groups[0]);
-            groupId.setGroupId(groups[0]);
+            var key = _.findKey(groups);  
+            // move one level down in object
+            var obj = groups[key];
+            console.log("user groups", obj);
+            groupId.setGroupId(obj);
         });
         // $state.go('');
     } else {
