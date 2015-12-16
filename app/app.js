@@ -2,7 +2,7 @@ var app = angular.module("NewsilyApp", ["ui.bootstrap", "firebase", "ui.router",
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/login");
+    // $urlRouterProvider.otherwise("/login");
 
     $stateProvider
         .state('login', {
@@ -12,8 +12,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('update-profile', {
           url: "/update-profile",
-          templateUrl: "app/partials/update-profile.html",
-          controller: "loginCtrl"
+          templateUrl: "app/partials/update-profile.html"
         })
         .state('create-or-join', {
           url: "/choose-group",
@@ -22,8 +21,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('add-members', {
           url: "/add-members",
-          templateUrl: "app/partials/add-members.html",
-          controller: "groupCtrl"
+          templateUrl: "app/partials/add-members.html"
         })
         .state('newsily-main', {
           url: "/newsily-main",
@@ -32,8 +30,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('newsily-main.posts', {
           url: "/newsily-main-posts",
-          templateUrl: "app/partials/main-view.posts.html",
-          controller: "mainAppCtrl"
+          templateUrl: "app/partials/main-view.posts.html"
     });
 });
 
@@ -49,17 +46,8 @@ function auth($firebaseAuth, $state, groupId, currentUserData) {
     if (authData) {
         console.log("Logged in as:", authData.uid);
         currentUserData.setUserData(authData);
-        var userGroups = new Firebase("https://newsily.firebaseio.com/users/" + authData.uid + "/joined_groups");
-        // getting user's joined groups and setting group factory with first group in the array
-        userGroups.once("value", function(snapshot) {
-            var groups = snapshot.val();
-            var key = _.findKey(groups);  
-            // move one level down in object
-            var obj = groups[key];
-            console.log("user groups", obj);
-            groupId.setGroupId(obj);
-        });
-        // $state.go('');
+        console.log("current user's data *****", currentUserData.getUserData());
+        $state.go("newsily-main.posts");
     } else {
         console.log("Logged out");
         // $state.go('login');
