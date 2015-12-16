@@ -7,7 +7,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 
 	// -- new firebase reference at groups location
 	var ref = new Firebase("https://newsily.firebaseio.com/groups");
-	ref = $firebaseArray(ref);
+	fbref = $firebaseArray(ref);
 
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser", currentUser);
@@ -19,7 +19,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			members: [currentUser.password.email]
 		};
 		console.log("groupObj", groupObj);
-		ref.$add(groupObj)
+		fbref.$add(groupObj)
 		.then(function(newRef) {
 			// sets created group id to factory for access from add members iteration of this controller
 			groupId.setGroupId(newRef.key());
@@ -37,20 +37,31 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 	$scope.addMembers = function() {
 		var group = groupId.getGroupId();
 		// -- new firebase reference at groups location
-		var ref = new Firebase("https://newsily.firebaseio.com/groups/" + group);
-		console.log("ref >>>>>>>>", ref);
+		var groupref = new Firebase("https://newsily.firebaseio.com/groups/" + group);
+		console.log("groupref >>>>>>>>", groupref);
 		$scope.addedMembers = [$scope.addMember1, $scope.addMember2, $scope.addMember3];
 
 		$scope.addedMembers.forEach(function(element) {
 			if (element) {
-				ref.child('members').push(element);
+				groupref.child('members').push(element);
 			}
 		});
 		$state.go("newsily-main.posts");
 	};
 
 	$scope.joinGroup = function() {
-		console.log("you clicked 'Join a group'!");
+		ref.orderByChild("groupname").equalTo($scope.joinGroupName).on('value', function(snapshot) {
+			console.log("snapshot", snapshot.val());
+			var matched_group = snapshot.val();
+			if ( matched_group !== null && matched_group !== undefined ) {
+				var obj = _.findKey(matched_group, 'members');	
+				obj = matched_group[obj];
+				for (var member in obj.members) {
+					console.log("this member", obj.members[member]);
+				}
+			} //end if
+			
+		});
 	};
 
 

@@ -14,7 +14,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// for loading group names into sidebar menu
 	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.auth.uid + "/joined_groups");
 	userGroupsRef = $firebaseArray(userGroupsRef);
-	$scope.userGroups = userGroupsRef;
+
 
 	// Add post to group page
 	$scope.addPost = function() {
@@ -24,13 +24,15 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		$http.get("http://api.embed.ly/1/extract?key=514b5e76363e48c7892110e2bd33a491&url=" + $scope.url + "&maxwidth=500")
 		.then(function(data) {
 			console.log("data", data);
+			var date = new Date();
 			// create object for upload with relevant info
 			var dataForFirebase = {
 				description: data.data.description,
 				images: data.data.images,
 				url: data.data.original_url,
 				title: data.data.title,
-				group: currentgroup
+				group: currentgroup,
+				postedat: date
 			};
 			console.log("dataForFirebase", dataForFirebase);
 			postsRef.$add(dataForFirebase)
