@@ -5,8 +5,10 @@ html,
 body,
 .index-parent,
 #ui-view,
-.right-side,
-.left-side,
+.right-add,
+.right-choose,
+.left-add,
+.left-choose,
 .full-height-row,
 .fixed-sidebar,
 .posts-div,
@@ -44,19 +46,28 @@ body,
   opacity: 0.35;
   color: #17183B; }
 
+.right-choose,
+.right-add {
+  z-index: 10;
+  box-shadow: -15px 6px 41px 18px #2b2b2b; }
+
+.right-choose {
+  color: linen;
+  background-color: #17183B; }
+
+.right-add {
+  background-color: #FF4F60; }
+
+.left-add,
 .left-choose {
   background-size: cover;
-  background-position: bottom center;
-  background-image: url("../images/loneisland.jpeg"); }
+  background-position: bottom center; }
+
+.left-choose {
+  background-image: url("../images/leafyroad.jpeg"); }
 
 .left-add {
-  background-size: cover;
-  background-position: bottom center;
-  background-image: url("../images/mtn.jpeg"); }
-
-.right-side {
-  background-color: #FF4F60;
-  box-shadow: 2px 0px 19px -1px rgba(0, 0, 0, 0.75); }
+  background-image: url("../images/treebackground.jpeg"); }
 
 .fixed-sidebar {
   background-color: #17183B; }

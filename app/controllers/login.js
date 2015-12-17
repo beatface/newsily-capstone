@@ -81,6 +81,8 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		var ref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid);
 		ref = $firebaseObject(ref);
 		ref.email = $scope.user_email;
+		ref.username = $scope.user_email;
+		ref.photo = currentUser.password.profileImageURL;
 		ref.$save().then(function () {
             console.log(ref);
             // $state.go('create-or-join');
