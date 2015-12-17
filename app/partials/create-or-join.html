@@ -4,12 +4,12 @@
         <h1>You're at the crossroads...</h1>
         <div class="form-group">
             <label for "create-group">Create a group:</label>
-            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Email">
-            <button ng-click="createGroup()" class="btn btn-default">Create</button>
+            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Create group">
+            <button ng-click="createGroup('login')" class="btn btn-default">Create</button>
         </div>
         <div class="form-group">
             <label for "join-group">Join a group:</label>
-            <input type="text" class="form-control" id="join-group" ng-model="joinGroupName" placeholder="Email">
+            <input type="text" class="form-control" id="join-group" ng-model="joinGroupName" placeholder="Join group">
             <button ng-click="joinGroup()" class="btn btn-default">Join</button>
         </div>
     </div>

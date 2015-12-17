@@ -7,41 +7,32 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// setting all posts variable on the scope for loading into partial
 	postsRef = $firebaseArray(postsRef);
 	$scope.posts = postsRef;
-	console.log("POSTS for filter", $scope.posts);
+	// console.log("POSTS for filter", $scope.posts);
 
 	var currentUser = currentUserData.getUserData();
-	// console.log("currentUser", currentUser.auth.uid);
+	// console.log("currentUser", currentUser.uid);
 
 	$scope.currentGroupView = "";
 
 	// for loading group names into sidebar menu (uses both user's groups and all groups -below- to filter)
 	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.auth.uid + "/joined_groups");
 	$scope.usersGroups = $firebaseArray(userGroupsRef);
-	console.log("user's groups", $scope.usersGroups);
+	// console.log("user's groups", $scope.usersGroups);
 
 	// for loading group names into sidebar menu
 	var allGroupsRef = new Firebase("https://newsily.firebaseio.com/groups");
 	$scope.allGroups = $firebaseArray(allGroupsRef);
-	console.log("all groups", $scope.allGroups);
+	// console.log("all groups", $scope.allGroups);
 
 
-
-	var userGroups = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
     // getting user's joined groups and setting group factory with first group in the array
-    userGroups.on("value", function(snapshot) {
+    userGroupsRef.on("value", function(snapshot) {
         var groups = snapshot.val();
         var key = _.findKey(groups);  
         // move one level down in object
         $scope.currentGroupView = groups[key]; // gives the UID string
-        // console.log("user groups", obj);
-        groupId.setGroupId(obj);
-        // console.log("wat", wat);
 		console.log("inital group to view", $scope.currentGroupView);
     });
-
-	// assigning first of user's groups for default view on inital page load
-	// this value is reassigned on click of group menu item (function is below)
-	// $scope.currentGroupView = groupId.getGroupId();
 
 
 	// Add post to group page
@@ -90,11 +81,10 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		// ----- setting $scope.selectedGroup on click of menu
 	}); // end body click function
 
+
+	// changing view on click of group menu item
 	$scope.changeView = function(selectedID) {
-		console.log("menu item id >>", selectedID);
 		$scope.currentGroupView = selectedID;
-		// // groupId.setGroupId($scope.currentGroupView);
-		console.log("changed view is", $scope.currentGroupView);
 	};
 
 
