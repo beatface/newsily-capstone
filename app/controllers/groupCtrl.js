@@ -12,10 +12,10 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser", currentUser);
 
-	var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 
 	// -- Creates brand new group
 	$scope.createGroup = function() {
+		var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 		var groupObj = {
 			groupname: $scope.newGroupName,
 			members: [currentUser.password.email]
@@ -52,6 +52,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 
 	// -- Join an existing from from create-or-join onboarding view 
 	$scope.joinGroup = function() {
+		var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 
 		ref.orderByChild("groupname").equalTo($scope.joinGroupName).on('value', function(snapshot) {
 			console.log("snapshot", snapshot.val());

@@ -20,6 +20,7 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		ref.$authWithPassword(userObj)
 		.then(function(authData) {
 		  console.log("Logged in as:", authData.uid);
+		  currentUserData.setUserData(authData);
 		  var userGroups = new Firebase("https://newsily.firebaseio.com/users/" + authData.uid + "/joined_groups");
 		  // getting user's joined groups and setting group factory with first group in the array
 		  userGroups.once("value", function(snapshot) {

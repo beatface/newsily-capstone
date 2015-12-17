@@ -44,8 +44,8 @@ function auth($firebaseAuth, $state, groupId, currentUserData) {
     var authData = ref.$getAuth();
 
     if (authData) {
-        console.log("Logged in as:", authData.uid);
         currentUserData.setUserData(authData);
+        console.log("Logged in as:", authData.uid);
         console.log("current user's data *****", currentUserData.getUserData());
         $state.go("newsily-main.posts");
     } else {

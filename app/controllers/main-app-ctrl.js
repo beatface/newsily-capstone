@@ -34,7 +34,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
         // move one level down in object
         $scope.currentGroupView = groups[key]; // gives the UID string
         // console.log("user groups", obj);
-        // var wat = groupId.setGroupId(obj);
+        groupId.setGroupId(obj);
         // console.log("wat", wat);
 		console.log("inital group to view", $scope.currentGroupView);
     });

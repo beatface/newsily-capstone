@@ -3,6 +3,10 @@ $dark-navy: #17183B;
 $light-peach: #FBC6A2;
 $army-green: #7B7554;
 
+* {
+    font-family: Futura, sans-serif;
+}
+
 html,
 body,
 .index-parent,
@@ -11,21 +15,65 @@ body,
 .left-side,
 .full-height-row,
 .fixed-sidebar,
-.posts-div {
+.posts-div,
+.login-page,
+.col-md-4 {
 	height: 100%;
 	margin: 0;
 }
 
 // login and onboarding pages 
+#login-header {
+    font-family: 'Satisfy', serif;
+    color: linen;
+    font-size: 9em;
+    margin-bottom: 0;
+}
+#login-tagline {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: gainsboro;
+    font-size: 1.8em;
+    margin-bottom: 48%;
+    margin-top: 0;
+}
+
 .login-page {
 	text-align: center;
+    background-image: url('../images/nightsky.jpeg');
+    background-size: cover;
+    background-position: bottom left;
+    position: relative;
+    .login-col {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+    }
+}
+
+.login-inputs {
+    background-color: linen;
+    opacity: 0.35;
+    color: $dark-navy;
+}
+
+.left-choose {
+    background-size: cover;
+    background-position: bottom center;
+    background-image: url('../images/loneisland.jpeg');
+}
+
+.left-add {
+    background-size: cover;
+    background-position: bottom center;
+    background-image: url('../images/mtn.jpeg');
 }
 
 .right-side {
 	background-color: $bright-peach;
+    box-shadow: 2px 0px 19px -1px rgba(0,0,0,0.75); 
 }
 
-.left-side,
+// .left-side,
 .fixed-sidebar {
 	background-color: $dark-navy;
 }
