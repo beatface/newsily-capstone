@@ -21,7 +21,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('add-members', {
           url: "/add-members",
-          templateUrl: "app/partials/add-members.html"
+          templateUrl: "app/partials/add-members.html",
+          controller: "groupCtrl"
         })
         .state('newsily-main', {
           url: "/newsily-main",
@@ -34,25 +35,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 });
 
-angular
-    .module('NewsilyApp')
-    .run(auth);
+// angular
+//     .module('NewsilyApp')
+//     .run(auth);
 
-function auth($firebaseAuth, $state, groupId, currentUserData) {
-    var ref = new Firebase("https://newsily.firebaseio.com/users");
-    ref = $firebaseAuth(ref);
-    var authData = ref.$getAuth();
+// function auth($firebaseAuth, $state, groupId, currentUserData, $location) {
+    
 
-    if (authData) {
-        currentUserData.setUserData(authData);
-        console.log("Logged in as:", authData.uid);
-        console.log("current user's data *****", currentUserData.getUserData());
-        $state.go("newsily-main.posts");
-    } else {
-        console.log("Logged out");
-        // $state.go('login');
-    }
-
-} // end app run
+// } // end app run
 
 

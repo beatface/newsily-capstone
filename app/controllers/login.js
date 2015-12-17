@@ -1,7 +1,28 @@
 
-app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject", "groupId", "currentUserData",
-	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject, groupId, currentUserData) {
+app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArray", "$firebaseObject", "groupId", "currentUserData", "$location",
+	function($scope, $firebaseAuth, $state, $firebaseArray, $firebaseObject, groupId, currentUserData, $location) {
 		console.log("login js");
+
+
+
+	var initialRef = new Firebase("https://newsily.firebaseio.com/users");
+    initialRef = $firebaseAuth(initialRef);
+    var authData = initialRef.$getAuth();
+    // console.log("Logged in as:", authData.uid);
+
+    if (!!authData) {
+        currentUserData.setUserData(authData);
+        console.log("Logged in as:", authData.uid);
+        console.log("current user's data *****", currentUserData.getUserData());
+        // $location.path('/newsily-main/newsily-main-posts').replace();
+        $state.go('newsily-main.posts');
+    } else {
+        console.log("Logged out");
+        // $state.go('login');
+    }
+
+
+
 
 	$scope.user_email = "";
 	$scope.user_password = "";

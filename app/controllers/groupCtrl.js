@@ -7,7 +7,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 
 	// -- new firebase reference at groups location
 	var ref = new Firebase("https://newsily.firebaseio.com/groups");
-	fbref = $firebaseArray(ref);
+	var fbref = $firebaseArray(ref);
 
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser", currentUser);
@@ -22,7 +22,11 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		};
 		console.log("groupObj", groupObj);
 		var newRef = ref.push(groupObj);
+		//set value in factory
+		groupId.setGroupId(newRef.key());
+		//adding to joined groups
 		joinedref.push(newRef.key());
+
 		if (state === 'login') {
 			$state.go("add-members");
 		} else if (state === 'main') {

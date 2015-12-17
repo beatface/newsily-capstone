@@ -1,14 +1,20 @@
-app.factory("currentUserData", function() {
+app.factory("currentUserData", ["$firebaseAuth", function($firebaseAuth) {
 
-	var userData;
+	var initialRef = new Firebase("https://newsily.firebaseio.com/users");
+    initialRef = $firebaseAuth(initialRef);
+    var authData = initialRef.$getAuth();
 
 	return {
 		setUserData: function(data) {
-			userData = data;
+			authData = data;
 		},
 		getUserData: function() {
-			return userData;
+			if (!!authData) {
+				return authData;
+			} else {
+				return false;
+			}
 		}
 	};
 
-});
+}]);
