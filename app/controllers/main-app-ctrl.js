@@ -38,12 +38,30 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// Add post to group page
 	$scope.addPost = function() {
 		console.log("you clicked add post");
-		// var currentgroup = groupId.getGroupId();
 
+		var now = new Date();
+		// Create an array with the current month, day and time
+		var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
+		// Create an array with the current hour, minute and second
+		var time = [ now.getHours(), now.getMinutes() ];
+		// Determine AM or PM suffix based on the hour
+		var suffix = ( time[0] < 12 ) ? "AM" : "PM";
+		// Convert hour from military time
+		time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+		// If hour is 0, set it to 12
+		time[0] = time[0] || 12;
+		// If seconds and minutes are less than 10, add a zero
+		for ( var i = 1; i < 3; i++ ) {
+		    if ( time[i] < 10 ) {
+		        time[i] = "0" + time[i];
+		    }
+		}
+		// Return the formatted string
+		var formattedDate = date.join("/") + " " + time.join(":") + " " + suffix;
+		
 		$http.get("http://api.embed.ly/1/extract?key=514b5e76363e48c7892110e2bd33a491&url=" + $scope.url + "&maxwidth=500")
 		.then(function(data) {
 			console.log("data", data);
-			var date = new Date();
 			// create object for upload with relevant info
 			var dataForFirebase = {
 				description: data.data.description,
@@ -51,7 +69,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 				url: data.data.original_url,
 				title: data.data.title,
 				group: $scope.currentGroupView,
-				postedat: date
+				postDate: formattedDate
 			};
 			// push object to posts in firebase
 			postsRef.$add(dataForFirebase)
