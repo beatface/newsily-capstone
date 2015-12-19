@@ -46,7 +46,10 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		  // getting user's joined groups and setting group factory with first group in the array
 		  userGroups.once("value", function(snapshot) {
 		  	var groups = snapshot.val();
-			groupId.setGroupId(groups[0]);
+	        var key = _.findKey(groups);  
+	        // move one level down in object
+		  	console.log("user's groups ....", groups[key]);
+			groupId.setGroupId(groups[key]);
 		  });
 		  $state.go("newsily-main.posts");
 		}).catch(function(error) {

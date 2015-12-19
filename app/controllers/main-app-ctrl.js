@@ -85,6 +85,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// changing view on click of group menu item
 	$scope.changeView = function(selectedID) {
 		$scope.currentGroupView = selectedID;
+		groupId.setGroupId(selectedID);
 	};
 
 

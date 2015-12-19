@@ -34,9 +34,41 @@
 		<button id="logoutbtn" ng-click="logout()">Logout</button>
 
 		<div ng-controller="groupCtrl">
+			<button id="addmembersbtn" class="btn btn-default" data-toggle="modal" data-target="#addMembersModal">Add Members</button>
+
+		    <!-- ADD MEMBERS Modal -->
+		    <div class="modal fade" id="addMembersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		      <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		          <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		            <h4 class="modal-title" id="myModalLabel">Create or Join</h4>
+		          </div>
+		          <div class="modal-body">
+
+		          	<div class="form-group">
+			            <label for "add-members">Add members:</label>
+			            <input type="email" class="form-control" ng-model="addMember1" placeholder="Email">
+			            <input type="email" class="form-control" ng-model="addMember2" placeholder="Email">
+			            <input type="email" class="form-control" ng-model="addMember3" placeholder="Email">
+			            <button ng-click="addMembers()" class="btn btn-default">Add buddies</button>
+			        </div>
+		
+		          </div>
+		          <div class="modal-footer">
+		            <button type="button" class="btn btn-primary" ng-click="joinGroup()">Post</button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+
+
+
+
+
 			<button id="newgroupbtn" class="btn btn-default" data-toggle="modal" data-target="#joinModal">New group</button>
 			
-		    <!-- Modal -->
+		    <!-- NEW GROUP Modal -->
 		    <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		      <div class="modal-dialog" role="document">
 		        <div class="modal-content">
