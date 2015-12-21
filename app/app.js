@@ -12,7 +12,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('update-profile', {
           url: "/update-profile",
-          templateUrl: "app/partials/update-profile.html"
+          templateUrl: "app/partials/update-profile.html",
+          controller: "profileCtrl"
         })
         .state('create-or-join', {
           url: "/choose-group",

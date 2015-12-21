@@ -1,18 +1,23 @@
 
-app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "groupId", "currentUserData",
-	function($scope, $state, $firebaseArray, $http, groupId, currentUserData) {
+app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "groupId", "currentUserData", "$firebaseObject",
+	function($scope, $state, $firebaseArray, $http, groupId, currentUserData, $firebaseObject) {
 		console.log("main app ctrl");
 
 	var postsRef = new Firebase("https://newsily.firebaseio.com/posts");
 	// setting all posts variable on the scope for loading into partial
 	postsRef = $firebaseArray(postsRef);
 	$scope.posts = postsRef;
-	// console.log("POSTS for filter", $scope.posts);
+	console.log("POSTS for filter", $scope.posts);
 
 	var currentUser = currentUserData.getUserData();
-	// console.log("currentUser", currentUser.uid);
+	console.log("currentUser is ---- ", currentUser);
 
 	$scope.currentGroupView = "";
+
+	//for accessing user's profile data
+	var userProfileData = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.auth.uid);
+	userProfileData = $firebaseObject(userProfileData);
+	console.log("userProfileData", userProfileData);
 
 	// for loading group names into sidebar menu (uses both user's groups and all groups -below- to filter)
 	var userGroupsRef = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.auth.uid + "/joined_groups");
@@ -69,7 +74,8 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 				url: data.data.original_url,
 				title: data.data.title,
 				group: $scope.currentGroupView,
-				postDate: formattedDate
+				postDate: formattedDate,
+				postedBy: userProfileData.username
 			};
 			// push object to posts in firebase
 			postsRef.$add(dataForFirebase)
@@ -98,6 +104,13 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		}
 		// ----- setting $scope.selectedGroup on click of menu
 	}); // end body click function
+
+	$scope.newComment = "";
+	// ----- ADDING COMMENT TO POST'S MODAL ----- //
+	$scope.addComment = function(currentpost, newComment) {
+		console.log("adding a new comment", currentpost, newComment);
+	};
+
 
 
 	// changing view on click of group menu item

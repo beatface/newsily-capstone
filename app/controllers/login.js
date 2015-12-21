@@ -78,7 +78,7 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		.then(function() {
 		  // add user data to firebase
 		  $scope.saveProfile();
-		  $state.go('create-or-join');
+		  $state.go('update-profile');
 		}).catch(function(error) {
 		  console.error("Error: ", error);
 		});

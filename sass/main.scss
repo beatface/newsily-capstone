@@ -11,6 +11,8 @@ html,
 body,
 .index-parent,
 #ui-view,
+.right-update,
+.left-update,
 .right-add,
 .right-choose,
 .left-add,
@@ -58,6 +60,7 @@ body,
     color: $dark-navy;
 }
 
+.right-update,
 .right-choose,
 .right-add {
     z-index: 10;
@@ -70,7 +73,11 @@ body,
 .right-add {
     background-color: $bright-peach;
 }
+.right-update {
+    background-color: $light-peach;
+}
 
+.left-update,
 .left-add,
 .left-choose {
     background-size: cover;
@@ -81,6 +88,9 @@ body,
 }
 .left-add {
     background-image: url('../images/treebackground.jpeg');
+}
+.left-update {
+    background-image: url('../images/loneisland.jpeg');
 }
 
 

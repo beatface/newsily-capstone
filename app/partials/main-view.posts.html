@@ -4,10 +4,33 @@
 			<button type="button" class="viewModal btn btn-primary btn-lg" data-toggle="modal" data-target="#iframe">
 				<img src="{{post.images[0].url}}" id="{{post.url}}" class="viewModal"/>
 			</button>
+			<p>{{post.postDate}}</p>
+			<p>{{post.postedBy}}</p>
 			<h6>{{post.title}}</h6>
 			<p>{{post.description}}</p>
+			<button type="button" class="viewModal btn btn-primary btn-lg" data-toggle="modal" data-target="#{{post.$id}}">
+				Comments > 
+			</button>
+
+			<!-- Comments Modal -->
+			<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  	<div class="modal-dialog" role="document">
+			    	<div class="modal-content">
+				     	<div class="modal-body">
+					    	<div ng-repeat="comment in post.allComments">
+					    		 
+					    	</div>
+					    	<label>Add a comment:</label>
+				            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
+				            <button ng-click="addComment(post, newComment)" class="btn btn-default">Send</button>
+					    </div>
+			   		</div>
+			    </div>
+			</div>
+
 		</div>
-			<!-- Modal -->
+			<!-- iFrame Modal -->
 		<div class="modal fade" id="iframe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		  	<div class="modal-dialog" role="document">
