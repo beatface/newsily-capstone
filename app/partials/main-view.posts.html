@@ -18,8 +18,9 @@
 			  	<div class="modal-dialog" role="document">
 			    	<div class="modal-content">
 				     	<div class="modal-body">
-					    	<div ng-repeat="comment in post.allComments">
-					    		 
+					    	<div ng-repeat="comment in post.comments">
+					    		 <p>{{comment.content}}</p>
+					    		 <p>{{comment.postDate}} - {{comment.postedBy}}</p>
 					    	</div>
 					    	<label>Add a comment:</label>
 				            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
