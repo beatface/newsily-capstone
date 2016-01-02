@@ -1,16 +1,16 @@
 <div class="row full-height-row">
 	<!-- FIXED SIDEBAR -->
 	<div class="col-md-2 fixed-sidebar">
-		<!-- Button trigger modal -->
+		<!-- Add Post button trigger modal -->
 	    <button id="addPostBtn" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 	    	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 	    </button>
-	    <!-- Modal -->
+	    <!-- Add post Modal -->
 	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	          <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	            <h4 class="modal-title" id="myModalLabel">Add a post</h4>
 	          </div>
 	          <div class="modal-body">
@@ -22,7 +22,9 @@
 	        </div>
 	      </div>
 	    </div>
-        <div id="sidebar-wrapper">
+
+	    <!-- Groups menu items -->
+<!--         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li ng-repeat="group in allGroups">
                 	<div ng-repeat=" usergroup in usersGroups | filterBy: ['$value']:group.$id">
@@ -30,6 +32,19 @@
 	                </div>
                 </li>
             </ul>
+        </div> -->
+        <div id="sidebar-wrapper">
+        	<form name="theForm">
+	            <ul class="sidebar-nav">
+	                <li ng-repeat="group in allGroups">
+	                	<div ng-repeat=" usergroup in usersGroups | filterBy: ['$value']:group.$id" >
+		                	<input type="radio" name="groups" id="{{group.$id}}" ng-click="changeView(group.$id)" ng-model="currentGroupView" value="{{group.$id}}" class="btn">
+		                	<label for="{{group.$id}}">{{group.groupname}}</label>
+		                    	
+			            </div>
+	                </li>
+	            </ul>
+	        </form>
         </div>
 		<button id="logoutbtn" ng-click="logout()">Logout</button>
 
@@ -38,25 +53,20 @@
 
 		    <!-- ADD MEMBERS Modal -->
 		    <div class="modal fade" id="addMembersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      <div class="modal-dialog" role="document">
 		        <div class="modal-content">
 		          <div class="modal-header">
-		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		            <h4 class="modal-title" id="myModalLabel">Create or Join</h4>
+		            <h4 class="modal-title" id="myModalLabel">Add Members</h4>
 		          </div>
 		          <div class="modal-body">
 
 		          	<div class="form-group">
-			            <label for "add-members">Add members:</label>
 			            <input type="email" class="form-control" ng-model="addMember1" placeholder="Email">
 			            <input type="email" class="form-control" ng-model="addMember2" placeholder="Email">
 			            <input type="email" class="form-control" ng-model="addMember3" placeholder="Email">
 			            <button ng-click="addMembers()" class="btn btn-default">Add buddies</button>
 			        </div>
-		
-		          </div>
-		          <div class="modal-footer">
-		            <button type="button" class="btn btn-primary" ng-click="joinGroup()">Post</button>
 		          </div>
 		        </div>
 		      </div>
@@ -70,10 +80,10 @@
 			
 		    <!-- NEW GROUP Modal -->
 		    <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      <div class="modal-dialog" role="document">
 		        <div class="modal-content">
 		          <div class="modal-header">
-		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		            <h4 class="modal-title" id="myModalLabel">Create or Join</h4>
 		          </div>
 		          <div class="modal-body">
@@ -88,9 +98,6 @@
 			            <input type="text" class="form-control" id="join-group" ng-model="joinGroupName" placeholder="Join group">
 			            <button ng-click="joinGroup()" class="btn btn-default">Join</button>
 			        </div>
-		          </div>
-		          <div class="modal-footer">
-		            <button type="button" class="btn btn-primary" ng-click="joinGroup()">Post</button>
 		          </div>
 		        </div>
 		      </div>

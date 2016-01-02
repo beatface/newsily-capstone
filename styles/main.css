@@ -90,6 +90,25 @@ body,
   padding: 0; }
 
 /* Sidebar Styles */
+.groupMenuItem {
+  padding: 4px;
+  border: 1px solid white; }
+
+.groupMenuItem:checked {
+  background-color: yellow; }
+
+input[type="radio"] {
+  display: none; }
+
+input[type="radio"] + label {
+  width: 100%;
+  margin-left: -25px;
+  color: #FBC6A2; }
+
+input[type="radio"]:checked + label {
+  background-color: #FF4F60;
+  color: #17183B; }
+
 #newgroupbtn,
 #logoutbtn {
   position: absolute;
@@ -130,11 +149,18 @@ body,
 .sidebar-nav li a:focus {
   text-decoration: none; }
 
-#popover {
-  padding: 10px; }
+#addmembersbtn {
+  position: absolute;
+  bottom: 50px;
+  right: 13px; }
+
+#search-input {
+  position: absolute;
+  right: 25px;
+  top: 12px; }
 
 #wrapper {
-  width: 90%;
+  width: 95%;
   max-width: 1100px;
   min-width: 800px;
   margin: 50px auto; }
@@ -168,11 +194,13 @@ body,
   -o-transition: all .2s ease;
   transition: all .2s ease; }
 
-.pin img {
+.pin .img-btn {
+  padding: 0;
+  border: none;
   width: 100%;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 15px;
-  margin-bottom: 5px; }
+  background-size: cover;
+  background-position: bottom center;
+  position: relative; }
 
 .pin p {
   font: 12px/18px Arial, sans-serif;
@@ -212,5 +240,7 @@ iframe#modaliFrame {
   color: black;
   font-size: 3em;
   padding: 20px; }
+
+/************ COMMENT MODAL **************/
 
 /*# sourceMappingURL=main.css.map */

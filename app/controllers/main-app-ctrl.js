@@ -134,7 +134,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 			content: newComment,
 			postedBy: userProfileData.username,
 			postDate: formattedDate
-		}
+		};
 
 		var ref = new Firebase('https://newsily.firebaseio.com/posts/' + currentpost.$id + "/comments");
 		refArray = $firebaseArray(ref);
@@ -142,11 +142,13 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	};
 
 
-
+	$scope.currentgroup = "";
 	// changing view on click of group menu item
 	$scope.changeView = function(selectedID) {
 		$scope.currentGroupView = selectedID;
 		groupId.setGroupId(selectedID);
+		$scope.currentgroup = "'" + selectedID + "'";
+		console.log("current view button click ====", $scope.currentgroup);
 	};
 
 
