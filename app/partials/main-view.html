@@ -24,23 +24,13 @@
 	    </div>
 
 	    <!-- Groups menu items -->
-<!--         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li ng-repeat="group in allGroups">
-                	<div ng-repeat=" usergroup in usersGroups | filterBy: ['$value']:group.$id">
-                    	<button name="groups" id="{{group.$id}}" ng-click="changeView(group.$id)" ng-model="currentGroupView" value="{{group.$id}}" class="btn groupMenuItem">{{group.groupname}}</button>
-	                </div>
-                </li>
-            </ul>
-        </div> -->
         <div id="sidebar-wrapper">
         	<form name="theForm">
 	            <ul class="sidebar-nav">
 	                <li ng-repeat="group in allGroups">
 	                	<div ng-repeat=" usergroup in usersGroups | filterBy: ['$value']:group.$id" >
 		                	<input type="radio" name="groups" id="{{group.$id}}" ng-click="changeView(group.$id)" ng-model="currentGroupView" value="{{group.$id}}" class="btn">
-		                	<label for="{{group.$id}}">{{group.groupname}}</label>
-		                    	
+		                	<label for="{{group.$id}}">{{group.groupname}}</label> 	
 			            </div>
 	                </li>
 	            </ul>

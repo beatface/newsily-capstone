@@ -111,15 +111,7 @@ body,
 
 /* Sidebar Styles */
 
-// class for making group selection buttons look 'active'
-.groupMenuItem {
-    padding: 4px;
-    border: 1px solid white;
-}
-.groupMenuItem:checked {
-    background-color: yellow;
-}
-
+// making group selection buttons look 'active'
 input[type="radio"] {
     display: none;
 }
@@ -133,7 +125,8 @@ input[type="radio"] + label {
 input[type="radio"]:checked + label{ 
     background-color: $bright-peach; 
     color: $dark-navy;
-} 
+}
+
 
 #newgroupbtn,
 #logoutbtn {
@@ -192,6 +185,10 @@ input[type="radio"]:checked + label{
     position: absolute;
     right: 25px;
     top: 12px;
+}
+
+.favourite {
+    text-align: right;
 }
 
 #wrapper {

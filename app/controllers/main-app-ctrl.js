@@ -11,6 +11,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser is ---- ", currentUser);
+	$scope.currentUserId = currentUser.auth.uid;
 
 	$scope.currentGroupView = "";
 
@@ -40,7 +41,8 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
     });
 
 
-	// Add post to group page
+
+	// ------- Add post to group page --------- //
 	$scope.addPost = function() {
 		console.log("you clicked add post");
 
@@ -86,6 +88,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	};
 
 
+
 	// ----- CLICK FUNCTIONS ON BODY FOR DYNAMICALLY LOADED MENU ITEMS AND POSTS ----- // 
 	$('body').click(function(event) {
 		// ----- setting iframe source for modal on click
@@ -105,7 +108,11 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		// ----- setting $scope.selectedGroup on click of menu
 	}); // end body click function
 
+
+
+
 	$scope.newComment = "";
+
 	// ----- ADDING COMMENT TO POST'S MODAL ----- //
 	$scope.addComment = function(currentpost, newComment) {
 		console.log("adding a new comment", currentpost.$id, newComment);
@@ -142,9 +149,23 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	};
 
 
+
+	// ------- ADD FAVOURITE ----------- //
+	$scope.addFavourite = function(post) {
+		var favouritedRef = new Firebase("https://newsily.firebaseio.com/posts/" + post + "/favouritedBy");
+		favouritedRef.push(currentUser.auth.uid);
+	};
+
+	// assigns uid to filter variable
+	$scope.viewFavourites = function() {
+		$scope.myFavs = currentUser.auth.uid;
+	};
+
+
 	$scope.currentgroup = "";
 	// changing view on click of group menu item
 	$scope.changeView = function(selectedID) {
+		$scope.myFavs = ""; //resets filter variable to null
 		$scope.currentGroupView = selectedID;
 		groupId.setGroupId(selectedID);
 		$scope.currentgroup = "'" + selectedID + "'";

@@ -1,38 +1,42 @@
 <div id="wrapper">
+	<button><span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: #FF4F60; padding: 4px; font-size: 1.6em" ng-click="viewFavourites()"></span></button>
 	<input id="search-input" ng-model="searchText" placeholder="Search posts">
 	<div id="columns">
-		<div class="pin" ng-repeat="post in posts | filter: currentGroupView | filter: searchText">
-			<button id="{{post.url}}" type="button" class="viewModal btn btn-primary btn-lg img-btn" data-toggle="modal" data-target="#iframe" style="background-image: url('{{post.images[0].url}}'); width: 100%; height: 150px">
-				<!-- <img src="{{post.images[0].url}}" id="{{post.url}}" class="viewModal"/> -->
-			</button>
-			<p>{{post.postDate}}</p>
-			<p>{{post.postedBy}}</p>
-			<h6>{{post.title}}</h6>
-			<p>{{post.description}}</p>
-			<button type="button" class="viewModal btn btn-primary btn-lg" data-toggle="modal" data-target="#{{post.$id}}">
-				Comments > 
-			</button>
+		
+			<div class="pin" ng-repeat="post in posts | filter: currentGroupView | filter: searchText | filterBy:['$id']:favourite.$value | filter: myFavs">
+				<p class="favourite"><span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: #FF4F60; padding: 4px; font-size: 1.4em" ng-click="addFavourite(post.$id)"></span></p>
+				<button id="{{post.url}}" type="button" class="viewModal btn btn-primary btn-lg img-btn" data-toggle="modal" data-target="#iframe" style="background-image: url('{{post.images[0].url}}'); width: 100%; height: 150px">
+					<!-- <img src="{{post.images[0].url}}" id="{{post.url}}" class="viewModal"/> -->
+				</button>
+				<p>{{post.postDate}}</p>
+				<p>{{post.postedBy}}</p>
+				<h6>{{post.title}}</h6>
+				<p>{{post.description}}</p>
+				<button type="button" class="viewModal btn btn-primary btn-lg" data-toggle="modal" data-target="#{{post.$id}}">
+					Comments > 
+				</button>
 
-			<!-- Comments Modal -->
-			<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  	<div class="modal-dialog" role="document">
-			    	<div class="modal-content">
-				     	<div class="modal-body">
-					    	<div ng-repeat="comment in post.comments">
-					    		<p class="delete-comment" style="font-size: .7em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
-					    		<p class="comment-text">{{comment.content}}</p>
-					    		<!-- <p class="comment-info">{{comment.postDate}} - {{comment.postedBy}}</p> -->
-					    	</div>
-					    	<label>Add a comment:</label>
-				            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
-				            <button ng-click="addComment(post, newComment)" class="btn btn-default">Send</button>
-					    </div>
-			   		</div>
-			    </div>
+				<!-- Comments Modal -->
+				<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  	<div class="modal-dialog" role="document">
+				    	<div class="modal-content">
+					     	<div class="modal-body">
+						    	<div ng-repeat="comment in post.comments">
+						    		<p class="delete-comment" style="font-size: .7em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
+						    		<p class="comment-text">{{comment.content}}</p>
+						    		<!-- <p class="comment-info">{{comment.postDate}} - {{comment.postedBy}}</p> -->
+						    	</div>
+						    	<label>Add a comment:</label>
+					            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
+					            <button ng-click="addComment(post, newComment)" class="btn btn-default">Send</button>
+						    </div>
+				   		</div>
+				    </div>
+				</div>
+
 			</div>
-
-		</div>
+	
 			<!-- iFrame Modal -->
 		<div class="modal fade" id="iframe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -90,13 +90,6 @@ body,
   padding: 0; }
 
 /* Sidebar Styles */
-.groupMenuItem {
-  padding: 4px;
-  border: 1px solid white; }
-
-.groupMenuItem:checked {
-  background-color: yellow; }
-
 input[type="radio"] {
   display: none; }
 
@@ -158,6 +151,9 @@ input[type="radio"]:checked + label {
   position: absolute;
   right: 25px;
   top: 12px; }
+
+.favourite {
+  text-align: right; }
 
 #wrapper {
   width: 95%;
