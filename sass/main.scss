@@ -4,7 +4,7 @@ $light-peach: #FBC6A2;
 $army-green: #7B7554;
 
 * {
-    font-family: Futura, sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 html,
@@ -97,15 +97,12 @@ body,
 // .left-side,
 .fixed-sidebar {
 	background-color: $dark-navy;
-}
-
-.posts-div {
-	background-color: #fdece1;
-}
-
-.fixed-sidebar {
 	color: $light-peach;
 	padding: 0;
+    position: relative;
+    width: 245px;
+    height: 100%;
+    // z-index: 1;
 }
 
 
@@ -127,6 +124,17 @@ input[type="radio"]:checked + label{
     color: $dark-navy;
 }
 
+.img-circle {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    // display: inline-block;
+    margin: 20px 0 0 0;
+    text-align: center;
+}
+.img-div {
+    text-align: center;
+}
 
 #newgroupbtn,
 #logoutbtn {
@@ -137,11 +145,19 @@ input[type="radio"]:checked + label{
     right: 13px;
 }
 #addPostBtn {
-    float: right;
+    width: 45px;
+    height: 45px;
+    // position: absolute;
+    right: 8px;
+    top: 5px;
     margin: 8px;
+    border: none;
+    border-radius: 50%;
+    background-color: $army-green;
 }
+
 #sidebar-wrapper {
-    margin-top: 45px;
+    margin-top: 15px;
 }
 .sidebar-nav {
     // position: absolute;
@@ -181,14 +197,59 @@ input[type="radio"]:checked + label{
 
 // ********** POSTS ***********//
 
+.posts-div {
+    margin-left: 245px;
+    height: 100%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: auto;
+    background-color: #fdece1;
+}
+
+
 #search-input {
     position: absolute;
     right: 25px;
     top: 12px;
 }
 
-.favourite {
-    text-align: right;
+.comment-btn { // comment button on each post
+    -webkit-appearance: none;
+    outline: 0;
+    background-color: #aca686;
+    border: none;
+    border-bottom: 2px solid $army-green;
+    padding: 4px 6px;
+    color: white;
+    border-radius: 2px;
+    width: 105px;
+    cursor: pointer;
+    font-size: 12px;
+    -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+}
+
+#view-favourites { // view favourites button at top of page
+    position: absolute;
+    top: 12px;
+    right: 225px;
+    border: none;
+    background-color: transparent;
+    padding: 2px;
+}
+
+#favourites-span { // view favourites button at top of page
+    padding: 0 !important;
+    right: 0;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.heart-post {
+    margin-left: 37px;
 }
 
 #wrapper {

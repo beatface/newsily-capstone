@@ -1,5 +1,5 @@
 * {
-  font-family: Futura, sans-serif; }
+  font-family: "Open Sans", sans-serif; }
 
 html,
 body,
@@ -80,14 +80,12 @@ body,
   background-image: url("../images/loneisland.jpeg"); }
 
 .fixed-sidebar {
-  background-color: #17183B; }
-
-.posts-div {
-  background-color: #fdece1; }
-
-.fixed-sidebar {
+  background-color: #17183B;
   color: #FBC6A2;
-  padding: 0; }
+  padding: 0;
+  position: relative;
+  width: 245px;
+  height: 100%; }
 
 /* Sidebar Styles */
 input[type="radio"] {
@@ -102,6 +100,16 @@ input[type="radio"]:checked + label {
   background-color: #FF4F60;
   color: #17183B; }
 
+.img-circle {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  margin: 20px 0 0 0;
+  text-align: center; }
+
+.img-div {
+  text-align: center; }
+
 #newgroupbtn,
 #logoutbtn {
   position: absolute;
@@ -111,11 +119,17 @@ input[type="radio"]:checked + label {
   right: 13px; }
 
 #addPostBtn {
-  float: right;
-  margin: 8px; }
+  width: 45px;
+  height: 45px;
+  right: 8px;
+  top: 5px;
+  margin: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: #7B7554; }
 
 #sidebar-wrapper {
-  margin-top: 45px; }
+  margin-top: 15px; }
 
 .sidebar-nav {
   top: 0;
@@ -147,13 +161,53 @@ input[type="radio"]:checked + label {
   bottom: 50px;
   right: 13px; }
 
+.posts-div {
+  margin-left: 245px;
+  height: 100%;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: auto;
+  background-color: #fdece1; }
+
 #search-input {
   position: absolute;
   right: 25px;
   top: 12px; }
 
-.favourite {
-  text-align: right; }
+.comment-btn {
+  -webkit-appearance: none;
+  outline: 0;
+  background-color: #aca686;
+  border: none;
+  border-bottom: 2px solid #7B7554;
+  padding: 4px 6px;
+  color: white;
+  border-radius: 2px;
+  width: 105px;
+  cursor: pointer;
+  font-size: 12px;
+  -webkit-transition-duration: 0.25s;
+  transition-duration: 0.25s; }
+
+#view-favourites {
+  position: absolute;
+  top: 12px;
+  right: 225px;
+  border: none;
+  background-color: transparent;
+  padding: 2px; }
+
+#favourites-span {
+  padding: 0 !important;
+  right: 0;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px; }
+
+.heart-post {
+  margin-left: 37px; }
 
 #wrapper {
   width: 95%;

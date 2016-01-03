@@ -68,10 +68,11 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		// create user
 		ref.$createUser(userObj)
 		.then(function(userData) {
-		  console.log("User " + userData.uid + " created successfully!");
-		  // log user in
-		  return ref.$authWithPassword(userObj);
-		}).then(function(authData) {
+			console.log("User " + userData.uid + " created successfully!");
+			return ref.$authWithPassword(userObj);
+		    // log user in
+		})
+		.then(function(authData) {
 		  currentUserData.setUserData(authData);
 		  console.log("Logged in with email as:", authData.uid);
 		})
@@ -80,22 +81,21 @@ app.controller("loginCtrl", ["$scope", "$firebaseAuth", "$state", "$firebaseArra
 		  $scope.saveProfile();
 		  $state.go('update-profile');
 		}).catch(function(error) {
-		  console.error("Error: ", error);
+		  console.error("Error: ", error.code);
+            if (error.code == "EMAIL_TAKEN") {
+              // case "EMAIL_TAKEN":
+              	$scope.message = 'Oh snap! The new user account cannot be created because the email is already in use.';
+                console.log("won't work");
+            } else if (error.code == "INVALID_EMAIL") {
+              // case "INVALID_EMAIL":
+                $scope.message = 'Dang! The specified email was invalid. Try again!';
+            } else {
+              // default:
+                $scope.message = 'Oh no! Something went wrong. Try again!' ;
+                console.log("another error occurred");
+            }
 		});
 	};
-
-
-	// // ------- REGISTER NEW USER THROUGH FACEBOOK ------- //
-	// $scope.facebookRegister = function() {
-	// 	ref.$authWithOAuthPopup("facebook")
-	// 	.then(function(authData) {
-	// 	  	console.log("Logged in with Facebook as:", authData.uid);
-	// 	  	$scope.$parent.$parent.userAuthData.uid = authData.uid;
-	// 	  	$state.go('update-profile');
-	// 	}).catch(function(error) {
-	// 	 	console.error("Authentication failed:", error);
-	// 	});
-	// };
 
 
 	// ------- SAVE PROFILE INFO ------- //

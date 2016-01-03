@@ -2,8 +2,11 @@
 	<!-- FIXED SIDEBAR -->
 	<div class="col-md-2 fixed-sidebar">
 		<!-- Add Post button trigger modal -->
+		<div class="img-div" ng-if="currentUserProfileData.photo">
+			<img class="img-circle" src="{{currentUserProfileData.photo}}">
+		</div>
 	    <button id="addPostBtn" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-	    	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	    	<span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: #FBC6A2"></span>
 	    </button>
 	    <!-- Add post Modal -->
 	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

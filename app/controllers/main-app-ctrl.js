@@ -18,6 +18,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	//for accessing user's profile data
 	var userProfileData = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.auth.uid);
 	userProfileData = $firebaseObject(userProfileData);
+	$scope.currentUserProfileData = userProfileData;
 	console.log("userProfileData", userProfileData);
 
 	// for loading group names into sidebar menu (uses both user's groups and all groups -below- to filter)
@@ -86,6 +87,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 			});
 		});
 	};
+
 
 
 
