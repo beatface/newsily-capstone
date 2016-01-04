@@ -207,6 +207,10 @@ input[type="radio"]:checked + label {
   cursor: pointer;
   margin-left: 10px; }
 
+.heart-post,
+.delete-post {
+  cursor: pointer; }
+
 .heart-post {
   margin-left: 37px; }
 

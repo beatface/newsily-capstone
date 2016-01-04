@@ -249,10 +249,14 @@ input[type="radio"]:checked + label{
     margin-left: 10px;
 }
 
-.heart-post { // favourite heart on each individual post
-    margin-left: 37px;
+.heart-post, // favourite heart on each individual post
+.delete-post { 
+    cursor: pointer;
 }
 
+.heart-post {
+    margin-left: 37px;
+}
 
 #wrapper {
     width: 95%;

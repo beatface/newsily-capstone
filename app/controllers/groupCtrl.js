@@ -48,6 +48,9 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 				groupref.child('members').push(element);
 			}
 		});
+		$scope.addMember1 = ""; // resetting input fields to be blank
+		$scope.addMember2 = "";
+		$scope.addMember3 = "";
 		$state.go("newsily-main.posts");
 	};
 
