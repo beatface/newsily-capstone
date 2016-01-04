@@ -11,14 +11,13 @@
 				<p>{{post.postDate}}</p>
 				<p>{{post.postedBy}}</p>
 				<h5>{{post.title}}</h5>
-				<!-- <p>{{post.description}}</p> -->
 				<button type="button" class="viewModal comment-btn" data-toggle="modal" data-target="#{{post.$id}}">
 					Comments > 
 				</button>
 				<!-- HEART favourite button -->
-				<span class="glyphicon glyphicon-heart heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="addFavourite(post.$id, postIndex)" ng-hide="favouritePost[postIndex]"></span>
+				<span class="glyphicon glyphicon-heart heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="addFavourite(post.$id, postIndex)" ng-if="post.favouritedBy.indexOf(currentUserId) === -1"></span>
 				<!-- X delete favourite button -->
-				<span class="glyphicon glyphicon-remove heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="removeFavourite(post.$id, postIndex)" ng-show="favouritePost[postIndex]"></span>
+				<span class="glyphicon glyphicon-remove heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="removeFavourite(post.$id, postIndex)" ng-if="post.favouritedBy.indexOf(currentUserId) != -1"></span>
 
 				<!-- Comments Modal -->
 				<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

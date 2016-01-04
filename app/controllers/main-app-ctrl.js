@@ -152,35 +152,16 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 
 	// ------- ADD FAVOURITE ----------- //
-	// $scope.addFavourite = function(post, postIndex) {
-	// 	console.log("post index is ===", postIndex);
-	// 	$scope.favourited = postIndex;
-	// 	var favouritedRef = new Firebase("https://newsily.firebaseio.com/posts/" + post + "/favouritedBy");
-	// 	favouritedRef.push(currentUser.auth.uid);
-	// };
-
-	// $scope.isFavourited = function(postIndex){
- //        return  $scope.favourited === postIndex;
- //    };
-
- 	$scope.favouritePost = [];
-    $scope.deletePost = [];
         
 	$scope.addFavourite = function(postId, index) {
 		var favouritedRef = new Firebase("https://newsily.firebaseio.com/posts/" + postId + "/favouritedBy");
 		favouritedRef.push(currentUser.auth.uid);
-		console.log("adding favourite");
-
-		$scope.favouritePost[index] = true;
-		if ($scope.active === false) {
-		    $scope.active = true;
-		} else {
-			$scope.active = false;
-		}
+		console.log("adding favourite", $scope.favouritedFBArray);
 	};
 
+
 	$scope.removeFavourite = function(index) {
-	  $scope.favouritePost[index] = false;
+	  // $scope.favouritePost[index] = false;
 	  console.log("deleting favourite");
 	};
 
