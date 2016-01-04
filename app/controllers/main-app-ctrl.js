@@ -3,12 +3,16 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	function($scope, $state, $firebaseArray, $http, groupId, currentUserData, $firebaseObject) {
 		console.log("main app ctrl");
 
-	var postsRef = new Firebase("https://newsily.firebaseio.com/posts");
+	// --- ALL POSTS FROM FIREBASE
+	var allPostsRef = new Firebase("https://newsily.firebaseio.com/posts");
 	// setting all posts variable on the scope for loading into partial
-	postsRef = $firebaseArray(postsRef);
-	$scope.posts = postsRef;
-	console.log("POSTS for filter", $scope.posts);
+	var postsRef = $firebaseArray(allPostsRef);
+	$scope.posts = allPostsRef;
 
+	// --- ALL FAVOURITES FROM FIREBASE
+	var allFavsRef = new Firebase("https://newsily.firebaseio.com/favourites");
+
+	// --- CURRENT USER DATA
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser is ---- ", currentUser);
 	$scope.currentUserId = currentUser.auth.uid;
@@ -46,7 +50,6 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// ------- Add post to group page --------- //
 	$scope.addPost = function() {
 		console.log("you clicked add post");
-
 		var now = new Date();
 		// Create an array with the current month, day and time
 		var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
@@ -153,17 +156,19 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 
 	// ------- ADD FAVOURITE ----------- //
-        
-	$scope.addFavourite = function(postId, index) {
-		var favouritedRef = new Firebase("https://newsily.firebaseio.com/posts/" + postId + "/favouritedBy");
-		favouritedRef.push(currentUser.auth.uid);
-		console.log("adding favourite", $scope.favouritedFBArray);
+	$scope.addFavourite = function(postId) {
+		var favouritedRef = new Firebase("https://newsily.firebaseio.com/favourites/");
+		var favouriteObj = {
+			favPostId: postId, 
+			userId: currentUser.auth.uid
+		};
+		favouritedRef.push(favouriteObj);
 	};
 
-	$scope.removeFavourite = function(index) {
-	  // $scope.favouritePost[index] = false;
-	  console.log("deleting favourite");
-	};
+	// $scope.removeFavourite = function(index) {
+	//   // $scope.favouritePost[index] = false;
+	//   console.log("deleting favourite");
+	// };
 
 
 	// ----------- DELETE POST ----------- //
@@ -178,12 +183,40 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		});
 	};
 
+	var allPosts;
+
+	allFavsRef.orderByChild('userId').equalTo(currentUser.auth.uid).on('value', function(snapshot) {
+		var usersFavs = snapshot.val();
+		console.log("snapshot of all users favourites", usersFavs);
+
+		for (var favourite in usersFavs) {
+			for (var post in allPosts) {
+				if (usersFavs[favourite].favPostId === post) {
+					console.log("THIS POST MATCHES === ", usersFavs[favourite].favPostId, post);
+					console.log("000000 ==", $scope.posts);
+				}
+			}
+		}
+	});
+
+	// finding user's favourited posts
+	allPostsRef.on('value', function(snapshot) {
+		allPosts = snapshot.val();
+		console.log("snapshot of all posts", allPosts);
+
+	});
+
+
+
 
 
 	// assigns uid to filter variable
 	$scope.viewFavourites = function() {
-		$scope.myFavs = currentUser.auth.uid;
+		console.log("all posts ref", allPostsRef);
+		console.log("all favs ref", allFavsRef);
+
 	};
+
 
 
 	$scope.currentgroup = "";

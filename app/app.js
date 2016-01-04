@@ -36,13 +36,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 });
 
-// angular
-//     .module('NewsilyApp')
-//     .run(auth);
-
-// function auth($firebaseAuth, $state, groupId, currentUserData, $location) {
-    
-
-// } // end app run
 
 
