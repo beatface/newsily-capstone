@@ -1,48 +1,50 @@
 <div id="wrapper">
-	<button id="view-favourites"><span id="favourites-span" class="glyphicon glyphicon-heart" aria-hidden="true" style="color: #FF4F60; padding: 4px; font-size: 1.6em" ng-click="viewFavourites()"></span></button>
+	<div id="view-favourites"><span id="favourites-span" class="glyphicon glyphicon-heart" aria-hidden="true" style="color: #FF4F60; padding: 4px; font-size: 1.6em" ng-click="viewFavourites()"></span></div>
 	<input id="search-input" ng-model="searchText" placeholder="Search posts">
 	<div id="columns">
 		
-			<div class="pin" ng-repeat="(postIndex, post) in posts | filter: currentGroupView | filter: searchText | filterBy:['$id']:favourite.$value | filter: myFavs">
-				<!-- <span class="glyphicon glyphicon-remove" aria-hidden="true" style="padding: 0; font-size: 1em"></span> -->
-				<!-- post image -->
-				<button id="{{post.url}}" type="button" class="viewModal btn btn-primary btn-lg img-btn" data-toggle="modal" data-target="#iframe" style="background-image: url('{{post.images[0].url}}'); width: 100%; height: 150px">
-				</button>
-				<p>{{post.postDate}}</p>
-				<p>{{post.postedBy}}</p>
-				<h5>{{post.title}}</h5>
-				<button type="button" class="viewModal comment-btn" data-toggle="modal" data-target="#{{post.$id}}">
-					Comments > 
-				</button>
-				<!-- HEART favourite button -->
-				<span class="glyphicon glyphicon-heart heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="addFavourite(post.$id, postIndex)" ng-if="post.favouritedBy.indexOf(currentUserId) === -1"></span>
-				<!-- X delete favourite button -->
-				<span class="glyphicon glyphicon-remove heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="removeFavourite(post.$id, postIndex)" ng-if="post.favouritedBy.indexOf(currentUserId) != -1"></span>
+		<div class="pin" ng-repeat="(postIndex, post) in posts | filter: currentGroupView | filter: searchText | filterBy:['$id']:favourite.$value | filter: myFavs">
+			<!-- post image -->
+			<button id="{{post.url}}" type="button" class="viewModal btn btn-primary btn-lg img-btn" data-toggle="modal" data-target="#iframe" style="background-image: url('{{post.images[0].url}}'); width: 100%; height: 150px">
+			</button>
+			<!-- <p>{{post.postedBy}}</p> -->
+			<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="currentUserId === post.postedByUid" ng-click="deletePost(post.$id)"></span>
+			<h5>{{post.title}}</h5>
+			<p style="color: #b1a1a1; font-size: .75em;">{{post.postedBy}}<br>{{post.postDate}}</p>
 
-				<!-- Comments Modal -->
-				<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  	<div class="modal-dialog" role="document">
-				    	<div class="modal-content">
-					     	<div class="modal-body">
-						    	<div ng-repeat="comment in post.comments">
-						    		<p class="delete-comment" style="font-size: .7em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
-						    		<p class="comment-text">{{comment.content}}</p>
-						    		<!-- <p class="comment-info">{{comment.postDate}} - {{comment.postedBy}}</p> -->
-						    	</div>
-						    	<label>Add a comment:</label>
-					            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
-					            <button ng-click="addComment(post, newComment)" class="btn btn-default">Send</button>
-						    </div>
-				   		</div>
-				    </div>
-				</div>
+			<button type="button" class="viewModal comment-btn" data-toggle="modal" data-target="#{{post.$id}}">
+				Comments > 
+			</button>
 
-			</div>
+			<!-- HEART favourite button -->
+			<span class="glyphicon glyphicon-heart heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="addFavourite(post.$id, postIndex)"></span>
+			<!-- X delete favourite button -->
+			<!-- <span class="glyphicon glyphicon-remove heart-post" aria-hidden="true" style="color: #FF4F60; padding: 0; font-size: 1.4em" ng-click="removeFavourite(post.$id, postIndex)" ng-if="post.favouritedBy.indexOf(currentUserId) != -1"></span>
+ -->
+			<!-- Comments Modal -->
+			<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  	<div class="modal-dialog" role="document">
+			    	<div class="modal-content">
+				     	<div class="modal-body">
+
+					    	<div ng-repeat="comment in post.comments">
+					    		<p class="delete-comment" style="font-size: .7em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
+					    		<p class="comment-text">{{comment.content}}</p>
+					    	</div>
+
+					    	<label>Add a comment:</label>
+				            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
+				            <button ng-click="addComment(post, newComment)" class="btn btn-default">Send</button>
+					    </div>
+			   		</div>
+			    </div>
+			</div> <!-- end modal -->
+		</div>
 	
-			<!-- iFrame Modal -->
+		<!-- iFrame Modal -->
 		<div class="modal fade" id="iframe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		  	<div class="modal-dialog" role="document">
 		    	<div class="modal-content">
 			     	<div class="modal-body">
@@ -50,6 +52,6 @@
 				    </div>
 		   		</div>
 		    </div>
-		</div>
-	</div>
+		</div> <!-- end modal -->
+	</div> <!-- end columns -->
 </div>

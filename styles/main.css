@@ -94,7 +94,8 @@ input[type="radio"] {
 input[type="radio"] + label {
   width: 100%;
   margin-left: -25px;
-  color: #FBC6A2; }
+  color: #FBC6A2;
+  cursor: pointer; }
 
 input[type="radio"]:checked + label {
   background-color: #FF4F60;

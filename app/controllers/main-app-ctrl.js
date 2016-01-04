@@ -78,7 +78,8 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 				title: data.data.title,
 				group: $scope.currentGroupView,
 				postDate: formattedDate,
-				postedBy: userProfileData.username
+				postedBy: userProfileData.username,
+				postedByUid: currentUser.auth.uid
 			};
 			// push object to posts in firebase
 			postsRef.$add(dataForFirebase)
@@ -159,12 +160,23 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		console.log("adding favourite", $scope.favouritedFBArray);
 	};
 
-
 	$scope.removeFavourite = function(index) {
 	  // $scope.favouritePost[index] = false;
 	  console.log("deleting favourite");
 	};
 
+
+	// ----------- DELETE POST ----------- //
+	$scope.deletePost = function(postId) {
+		var postRef = new Firebase("https://newsily.firebaseio.com/posts/" + postId);
+		var postObj = $firebaseObject(postRef);
+		postObj.$remove()
+		.then(function(ref) {
+			console.log("delete complete", ref);
+		}, function(error) {
+		    console.log("Error:", error);
+		});
+	};
 
 
 
