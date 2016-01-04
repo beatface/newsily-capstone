@@ -4,7 +4,7 @@ $light-peach: #FBC6A2;
 $army-green: #7B7554;
 
 * {
-    font-family: "Open Sans", sans-serif;
+    font-family: Futura, sans-serif;
 }
 
 html,
@@ -248,7 +248,7 @@ input[type="radio"]:checked + label{
     margin-left: 10px;
 }
 
-.heart-post {
+.heart-post { // favourite heart on each individual post
     margin-left: 37px;
 }
 
