@@ -21,9 +21,9 @@
 			<!-- Comments Modal -->
 			<div class="modal fade" id="{{post.$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  	<div class="modal-dialog" role="document">
+			  	<div class="modal-dialog comment-dialog" role="document">
 			    	<div class="modal-content">
-				     	<div class="modal-body">
+				     	<div class="modal-body comment-body">
 				     		<h5 class="comment-modal-title yanone-text">{{post.title}}</h5>
 					    	<div ng-repeat="comment in post.comments">
 					    		<p class="delete-comment" style="font-size: .8em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
@@ -43,9 +43,9 @@
 		<!-- iFrame Modal -->
 		<div class="modal fade" id="iframe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  	<div class="modal-dialog" role="document">
-		    	<div class="modal-content">
-			     	<div class="modal-body">
+		  	<div class="modal-dialog iframe-dialog" role="document">
+		    	<div class="modal-content iframe-modal">
+			     	<div class="modal-body iframe-body">
 				    	<iframe src="" id="modaliFrame"></iframe>
 				    </div>
 		   		</div>

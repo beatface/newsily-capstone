@@ -8,13 +8,13 @@
 	    </button>
 	    <!-- Add post Modal -->
 	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	      <div class="modal-dialog" role="document">
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	      <div class="modal-dialog sidebar-modal-dialog" role="document">
 	        <div class="modal-content">
 	          <div class="modal-header">
 	            <h4 class="modal-title" id="myModalLabel">Add a post</h4>
 	          </div>
-	          <div class="modal-body">
+	          <div class="modal-body sidebar-modal-body">
 	            <input type="text" class="form-control" placeholder="Add url" ng-model="url" size="30">
 	          </div>
 	          <div class="modal-footer">
@@ -46,12 +46,12 @@
 		    <!-- ADD MEMBERS Modal -->
 		    <div class="modal fade" id="addMembersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		      <div class="modal-dialog" role="document">
+		      <div class="modal-dialog sidebar-modal-dialog" role="document">
 		        <div class="modal-content">
 		          <div class="modal-header">
 		            <h4 class="modal-title" id="myModalLabel">Add Members</h4>
 		          </div>
-		          <div class="modal-body">
+		          <div class="modal-body sidebar-modal-body">
 
 		          	<div class="form-group">
 			            <input type="email" class="form-control" ng-model="addMember1" placeholder="Email">
@@ -69,12 +69,12 @@
 		    <!-- NEW GROUP Modal -->
 		    <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    <div class="modal-dialog" role="document">
+			    <div class="modal-dialog sidebar-modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
 			            	<h4 class="modal-title" id="myModalLabel">Create or Join</h4>
 			            </div>
-			            <div class="modal-body">
+			            <div class="modal-body sidebar-modal-body">
 				          	<div class="form-group">
 					            <label for "create-group">Create a group:</label>
 					            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Create group">
