@@ -1,15 +1,14 @@
 <div id="wrapper">
 	<div id="view-favourites"><span id="favourites-span" class="glyphicon glyphicon-heart" aria-hidden="true" style="color: #FF4F60; padding: 4px; font-size: 1.6em" ng-click="toggleCustom()"></span></div>
-	<input id="search-input" ng-model="searchText" placeholder="Search posts">
+	<input class="open-text" id="search-input" ng-model="searchText" placeholder="Search posts">
 	<div id="columns">
 		<!--  | filter: currentGroupView | filter: searchText | filterBy:['$id']:favourite.$value | filter: myFavs -->
 		<div class="pin" ng-repeat="(postIndex, post) in posts | orderBy: '-postTimeStamp' | filter: currentGroupView | filter: searchText" ng-hide="custom && !post.favouritedBy[currentUserId]">
 			<!-- post image -->
 			<button id="{{post.url}}" type="button" class="viewModal btn btn-primary btn-lg img-btn" data-toggle="modal" data-target="#iframe" style="background-image: url('{{post.images[0].url}}'); width: 100%; height: 150px">
 			</button>
-			<span class="glyphicon glyphicon-remove delete-post" aria-hidden="true" ng-if="currentUserId === post.postedByUid" ng-click="deletePost(post.$id)"></span>
 			<h5>{{post.title}}</h5>
-			<p style="color: #b1a1a1; font-size: .75em;">{{post.postedBy}}<br>{{post.postDate}}</p>
+			<p style="color: #b1a1a1; font-size: .75em;">{{post.postedBy}} <span ng-if="currentUserId === post.postedByUid"> -- </span> <span class="glyphicon glyphicon-remove delete-post" aria-hidden="true" ng-if="currentUserId === post.postedByUid" ng-click="deletePost(post.$id)"></span><br>{{post.postDate}}</p>
 
 			<button type="button" class="viewModal comment-btn" data-toggle="modal" data-target="#{{post.$id}}">
 				Comments > 
@@ -33,7 +32,7 @@
 
 					    	<label>Add a comment:</label>
 				            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
-				            <button ng-click="addComment(post, newComment)" class="btn btn-default">Send</button>
+				            <button ng-click="addComment(post.$id, newComment)" class="btn btn-default">Send</button>
 					    </div>
 			   		</div>
 			    </div>

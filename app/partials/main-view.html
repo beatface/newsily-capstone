@@ -2,9 +2,7 @@
 	<!-- FIXED SIDEBAR -->
 	<div class="col-md-2 fixed-sidebar">
 		<!-- Add Post button trigger modal -->
-		<div class="img-div" ng-if="currentUserProfileData.photo">
-			<img class="img-circle" src="{{currentUserProfileData.photo}}">
-		</div>
+		<div class="img-circle" style="background-image: url('{{currentUserProfileData.photo}}')" ng-if="currentUserProfileData.photo"></div>
 	    <button id="addPostBtn" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 	    	<span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: #FBC6A2"></span>
 	    </button>
@@ -39,8 +37,9 @@
 	            </ul>
 	        </form>
         </div>
-		<button id="logoutbtn" ng-click="logout()">Logout</button>
 
+		<div id="sidebar-bottom-btns"></div>
+		<button id="logoutbtn" ng-click="logout()">Logout</button>
 		<div ng-controller="groupCtrl">
 			<button id="addmembersbtn" class="btn btn-default" data-toggle="modal" data-target="#addMembersModal">Add Members</button>
 
@@ -63,42 +62,34 @@
 		          </div>
 		        </div>
 		      </div>
-		    </div>
-
-
-
-
+		    </div> <!-- end add members modal -->
 
 			<button id="newgroupbtn" class="btn btn-default" data-toggle="modal" data-target="#joinModal">New group</button>
 			
 		    <!-- NEW GROUP Modal -->
 		    <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		      <div class="modal-dialog" role="document">
-		        <div class="modal-content">
-		          <div class="modal-header">
-		            <h4 class="modal-title" id="myModalLabel">Create or Join</h4>
-		          </div>
-		          <div class="modal-body">
-
-		          	<div class="form-group">
-			            <label for "create-group">Create a group:</label>
-			            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Create group">
-			            <button ng-click="createGroup('main')" class="btn btn-default">Create</button>
-			        </div>
-			        <div class="form-group">
-			            <label for "join-group">Join a group:</label>
-			            <input type="text" class="form-control" id="join-group" ng-model="joinGroupName" placeholder="Join group">
-			            <button ng-click="joinGroup()" class="btn btn-default">Join</button>
-			        </div>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
-
-
-
-		</div>
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			            	<h4 class="modal-title" id="myModalLabel">Create or Join</h4>
+			            </div>
+			            <div class="modal-body">
+				          	<div class="form-group">
+					            <label for "create-group">Create a group:</label>
+					            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Create group">
+					            <button ng-click="createGroup('main')" class="btn btn-default">Create</button>
+					        </div>
+					        <div class="form-group">
+					            <label for "join-group">Join a group:</label>
+					            <input type="text" class="form-control" id="join-group" ng-model="joinGroupName" placeholder="Join group">
+					            <button ng-click="joinGroup()" class="btn btn-default">Join</button>
+					        </div>
+			            </div>
+			        </div> 
+			    </div>
+		    </div> <!-- end new group modal -->
+		</div> <!-- end NG-CONTROLLER -->
 	</div>
 
 	<!-- POSTS CONTAINER -->

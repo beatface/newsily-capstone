@@ -116,8 +116,8 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	$scope.newComment = "";
 
 	// ---------------- ADDING COMMENT TO POST'S MODAL ---------------- //
-	$scope.addComment = function(currentpost, newComment) {
-		console.log("adding a new comment", currentpost.uniqueId, newComment);
+	$scope.addComment = function(postId, newComment) {
+		console.log("adding a new comment", postId, newComment);
 
 		var now = new Date();
 		// Create an array with the current month, day and time
@@ -143,7 +143,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 			postedBy: $scope.currentUserProfileData.username,
 			postDate: formattedDate
 		};
-		var ref = new Firebase('https://newsily.firebaseio.com/posts/' + currentpost.uniqueId + "/comments");
+		var ref = new Firebase('https://newsily.firebaseio.com/posts/' + postId + "/comments");
 		refArray = $firebaseArray(ref);
 		refArray.$add(commentObj);
 

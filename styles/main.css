@@ -1,6 +1,12 @@
 * {
   font-family: Futura, sans-serif; }
 
+.yanone-text {
+  font-family: 'Yanone Kaffeesatz', sans-serif; }
+
+.open-text {
+  font-family: 'Open Sans', sans-serif; }
+
 html,
 body,
 .index-parent,
@@ -88,6 +94,13 @@ body,
   height: 100%; }
 
 /* Sidebar Styles */
+#sidebar-bottom-btns {
+  background-color: #24255c;
+  height: 120px;
+  position: fixed;
+  bottom: 0;
+  width: 100%; }
+
 input[type="radio"] {
   display: none; }
 
@@ -105,19 +118,41 @@ input[type="radio"]:checked + label {
   border-radius: 50%;
   width: 70px;
   height: 70px;
-  margin: 20px 0 0 0;
-  text-align: center; }
-
-.img-div {
-  text-align: center; }
+  padding: 0;
+  border: none;
+  background-size: cover;
+  background-position: bottom center;
+  position: relative;
+  margin: 20px auto 0; }
 
 #newgroupbtn,
+#addmembersbtn,
 #logoutbtn {
+  font-family: 'Open Sans', sans-serif;
   position: absolute;
+  left: 64px;
+  -webkit-appearance: none;
+  outline: 0;
+  background-color: #7B7554;
+  border: none;
+  border-bottom: 2px solid #aca686;
+  padding: 4px 4px;
+  color: linen;
+  border-radius: 3px;
+  width: 105px;
+  cursor: pointer;
+  font-size: 13px;
+  -webkit-transition-duration: 0.25s;
+  transition-duration: 0.25s; }
+
+#logoutbtn {
   bottom: 8px; }
 
 #newgroupbtn {
-  right: 13px; }
+  bottom: 45px; }
+
+#addmembersbtn {
+  bottom: 81px; }
 
 #addPostBtn {
   width: 45px;
@@ -157,11 +192,6 @@ input[type="radio"]:checked + label {
 .sidebar-nav li a:focus {
   text-decoration: none; }
 
-#addmembersbtn {
-  position: absolute;
-  bottom: 50px;
-  right: 13px; }
-
 .posts-div {
   margin-left: 245px;
   height: 100%;
@@ -178,12 +208,13 @@ input[type="radio"]:checked + label {
   top: 12px; }
 
 .comment-btn {
+  font-family: 'Open Sans', sans-serif;
   -webkit-appearance: none;
   outline: 0;
   background-color: #aca686;
   border: none;
   border-bottom: 2px solid #7B7554;
-  padding: 4px 6px;
+  padding: 3px 3px;
   color: white;
   border-radius: 2px;
   width: 105px;
