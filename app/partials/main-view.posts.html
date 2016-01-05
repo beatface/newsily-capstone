@@ -24,15 +24,16 @@
 			  	<div class="modal-dialog" role="document">
 			    	<div class="modal-content">
 				     	<div class="modal-body">
-				     		<h5>{{post.title}}</h5>
+				     		<h5 class="comment-modal-title yanone-text">{{post.title}}</h5>
 					    	<div ng-repeat="comment in post.comments">
-					    		<p class="delete-comment" style="font-size: .7em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
+					    		<p class="delete-comment" style="font-size: .8em"><span>{{comment.postDate}} - {{comment.postedBy}}</span> <span>Delete</span></p>
 					    		<p class="comment-text">{{comment.content}}</p>
 					    	</div>
-
-					    	<label>Add a comment:</label>
-				            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
-				            <button ng-click="addComment(post.$id, newComment)" class="btn btn-default">Send</button>
+					    	<div class="add-comment-div">
+						    	<label>Add a comment:</label><br>
+					            <input type="text" class="form-control" ng-model="newComment" placeholder="...">
+					            <button ng-click="addComment(post.$id, newComment)" class="btn btn-default">Send</button>
+					        </div>
 					    </div>
 			   		</div>
 			    </div>

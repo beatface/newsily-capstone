@@ -155,8 +155,14 @@ input[type="radio"]:checked + label{
 #newgroupbtn,
 #addmembersbtn,
 #logoutbtn {
-    font-family: 'Open Sans', sans-serif;
     position: absolute;
+}
+
+#newgroupbtn,
+#addmembersbtn,
+#logoutbtn,
+.add-comment-div button {
+    font-family: 'Open Sans', sans-serif;
     left: 64px;
     -webkit-appearance: none;
     outline: 0;
@@ -246,6 +252,28 @@ input[type="radio"]:checked + label{
     right: 25px;
     top: 12px;
 }
+
+.comment-text {
+    margin: 5px 0;
+    border-bottom: 1px solid lightgrey;
+}
+.comment-modal-title {
+    font-size: 1.5em;
+}
+.add-comment-div {
+    position: absolute;
+    bottom: 10px;
+    width: 40%;
+}
+.add-comment-div input {
+    display: inline-block;
+    width: 70%;
+}
+.add-comment-div button {
+    float: right;
+    margin-top: 5px;
+}
+
 
 .comment-btn { // comment button on each post
     font-family: 'Open Sans', sans-serif;
