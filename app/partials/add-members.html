@@ -1,14 +1,14 @@
 <!-- CONTROLLER: groupCtrl -->
 <div class="row full-height-row">
     <div class="col-md-6 right-add">
-        <h1>You're almost there!</h1>
-        <h6>Looks like you need some buddies...</h6>
+        <h1 class="onboarding-header">You're almost there!</h1>
+        <h6 class="onboarding-subheader">Looks like you need some buddies...</h6>
         <div class="form-group">
-            <label for "create-group">Add buddies:</label>
-            <input type="email" class="form-control" ng-model="addMember1" placeholder="Email">
-            <input type="email" class="form-control" ng-model="addMember2" placeholder="Email">
-            <input type="email" class="form-control" ng-model="addMember3" placeholder="Email">
-            <button ng-click="addMembers()" class="btn btn-default">Add</button>
+            <label for "create-group" class="onboarding-label">Add buddies:</label>
+            <input type="email" class="form-control onboarding-input" ng-model="addMember1" placeholder="Email">
+            <input type="email" class="form-control onboarding-input" ng-model="addMember2" placeholder="Email">
+            <input type="email" class="form-control onboarding-input" ng-model="addMember3" placeholder="Email">
+            <button ng-click="addMembers()" class="btn btn-default onboarding-button">Add</button>
         </div>
     </div>
     <div class="col-md-6 left-add">

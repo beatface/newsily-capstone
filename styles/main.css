@@ -58,7 +58,8 @@ body,
 .right-choose,
 .right-add {
   z-index: 10;
-  box-shadow: -15px 6px 41px 18px #2b2b2b; }
+  box-shadow: -15px 6px 41px 18px #2b2b2b;
+  padding: 0 80px; }
 
 .right-choose {
   color: linen;
@@ -84,6 +85,26 @@ body,
 
 .left-update {
   background-image: url("../images/loneisland.jpeg"); }
+
+.onboarding-header {
+  font-family: 'Satisfy', serif;
+  margin: 120px 0 50px 0;
+  font-size: 3.4em; }
+
+.onboarding-subheader {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  margin: -35px 0 50px 0;
+  font-size: 1.4em; }
+
+.onboarding-label {
+  font-size: 1em;
+  margin: 14px 0 4px 2px; }
+
+.onboarding-input {
+  margin-top: 4px; }
+
+.onboarding-button {
+  margin-top: 8px; }
 
 .fixed-sidebar {
   background-color: #17183B;

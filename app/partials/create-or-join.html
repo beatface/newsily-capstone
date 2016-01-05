@@ -1,16 +1,16 @@
 <!-- CONTROLLER: groupCtrl -->
 <div class="row full-height-row">
     <div class="col-md-6 right-choose">
-        <h1>You're at the crossroads...</h1>
+        <h1 class="onboarding-header">You're at the crossroads...</h1>
         <div class="form-group">
-            <label for "create-group">Create a group:</label>
-            <input type="text" class="form-control" id="create-group" ng-model="newGroupName" placeholder="Create group">
-            <button ng-click="createGroup('login')" class="btn btn-default">Create</button>
+            <label for "create-group" class="onboarding-label">Create a group:</label>
+            <input type="text" class="form-control onboarding-input" id="create-group" ng-model="newGroupName" placeholder="Create group">
+            <button ng-click="createGroup('login')" class="btn btn-default onboarding-button">Create</button>
         </div>
         <div class="form-group">
-            <label for "join-group">Join a group:</label>
-            <input type="text" class="form-control" id="join-group" ng-model="joinGroupName" placeholder="Join group">
-            <button ng-click="joinGroup()" class="btn btn-default">Join</button>
+            <label for "join-group" class="onboarding-label">Join a group:</label>
+            <input type="text" class="form-control onboarding-input" id="join-group" ng-model="joinGroupName" placeholder="Join group">
+            <button ng-click="joinGroup()" class="btn btn-default onboarding-button">Join</button>
         </div>
     </div>
     <div class="col-md-6 left-side left-choose">
