@@ -6,18 +6,9 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	// -------------- ALL POSTS FROM FIREBASE
 	var allPostsRef = new Firebase("https://newsily.firebaseio.com/posts");
 	// setting all posts variable on the scope for loading into partial
-	allPostsRef.on('value', function(snapshot) {
-		console.log("all posts snapshot", snapshot.val());
-		$scope.postsArr = [];
-		$scope.postsObj = snapshot.val();
-		// pushing object of objects into array of objects for angular filter to work
-		for (var item in $scope.postsObj){
-			$scope.postsObj[item].uniqueId = item;
-		    $scope.postsArr.push($scope.postsObj[item]);
-		}
-		triggerIsLiked();
-	});
 
+	postsRef = $firebaseArray(allPostsRef);
+	$scope.posts = postsRef;
 
 	// -------------- ALL FAVOURITES FROM FIREBASE
 	var allFavsRef = new Firebase("https://newsily.firebaseio.com/favourites");
@@ -173,49 +164,16 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		});
 	};
 
-
-	// ---------------------- DETERMINE LIKED POSTS for partial filtering ---------------------- //
-	function triggerIsLiked() {
-		for (var favourite in $scope.usersFavs) {
-			for (var post in $scope.postsArr) {
-				if ($scope.usersFavs[favourite].favPostId === $scope.postsArr[post].uniqueId) {
-					console.log("THIS POST MATCHES === ", $scope.usersFavs[favourite].favPostId, $scope.postsArr[post].uniqueId);
-					$scope.postsArr[post].isLiked = true;
-				}
-			}
-		}
-	}
-
-	allFavsRef.orderByChild('userId').equalTo(currentUser.auth.uid).on('value', function(snapshot) {
-		$scope.usersFavs = snapshot.val();
-		console.log("snapshot of all users favourites", $scope.usersFavs);
-		triggerIsLiked();
-	});
-
-
-
 	// ------------------ ADD FAVOURITE ---------------------- //
 	$scope.addFavourite = function(postId) {
-		var favouritedRef = new Firebase("https://newsily.firebaseio.com/favourites/");
-		var favouriteObj = {
-			favPostId: postId, 
-			userId: currentUser.auth.uid
-		};
-		favouritedRef.push(favouriteObj);
+		var favouritedRef = new Firebase("https://newsily.firebaseio.com/posts/" + postId + "/favouritedBy/" + $scope.currentUserId);
+		favouritedRef.set(currentUser.auth.uid);
 	};
 
 	$scope.removeFavourite = function(postId) {
 	    console.log("deleting favourite");
-	    var favouritedRef = new Firebase("https://newsily.firebaseio.com/favourites/");
-	    favouritedRef.once('value', function(snapshot) {
-		    var userFavs = snapshot.val();
-		    var favToDelete = _.findKey(userFavs, function(fav) {
-		    	return fav.favPostId === postId;
-		    });
-		    console.log("fav to delete is   ", favToDelete);
-		    var refToDelete = new Firebase("https://newsily.firebaseio.com/favourites/" + favToDelete);
-		    refToDelete.remove();
-		});	
+	    var deletePost = new Firebase("https://newsily.firebaseio.com/posts/" + postId + "/favouritedBy/" + $scope.currentUserId);
+	    deletePost.remove();
 	};
 
 
