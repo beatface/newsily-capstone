@@ -2,7 +2,6 @@ var app = angular.module("NewsilyApp", ["ui.bootstrap", "firebase", "ui.router",
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/login");
 
     $stateProvider
         .state('login', {
@@ -34,6 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
           url: "/newsily-main-posts",
           templateUrl: "app/partials/main-view.posts.html"
     });
+    $urlRouterProvider.otherwise("/login");
 });
 
 
