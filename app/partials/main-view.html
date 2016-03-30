@@ -9,19 +9,19 @@
 	    <!-- Add post Modal -->
 	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	      <div class="modal-dialog" role="document">
-	        <div class="modal-content">
-	          <div class="modal-header">
-	            <h4 class="modal-title" id="myModalLabel">Add a post</h4>
-	          </div>
-	          <div class="modal-body">
-	            <input type="text" class="form-control" placeholder="Add url" ng-model="url" size="30">
-	          </div>
-	          <div class="modal-footer">
-	            <button type="button" class="btn btn-primary" ng-click="addPost()">Post</button>
-	          </div>
-	        </div>
-	      </div>
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Add a post</h4>
+					</div>
+					<div class="modal-body">
+						<input type="text" class="form-control" placeholder="Add url" ng-model="url" size="30">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" ng-click="addPost()">Post</button>
+					</div>
+		        </div>
+		    </div>
 	    </div>
 
 	    <!-- Groups menu items -->
@@ -31,7 +31,7 @@
 	                <li ng-repeat="group in allGroups">
 	                	<div ng-repeat=" usergroup in usersGroups | filterBy: ['$value']:group.$id" >
 		                	<input type="radio" name="groups" id="{{group.$id}}" ng-click="changeView(group.$id)" ng-model="currentGroupView" value="{{group.$id}}" class="btn">
-		                	<label for="{{group.$id}}">{{group.groupname}}</label> 	
+		                	<label for="{{group.$id}}">{{group.groupname}}</label>
 			            </div>
 	                </li>
 	            </ul>
@@ -65,7 +65,7 @@
 		    </div> <!-- end add members modal -->
 
 			<button id="newgroupbtn" class="btn btn-default" data-toggle="modal" data-target="#joinModal">New group</button>
-			
+
 		    <!-- NEW GROUP Modal -->
 		    <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -86,7 +86,7 @@
 					            <button ng-click="joinGroup()" class="btn btn-default">Join</button>
 					        </div>
 			            </div>
-			        </div> 
+			        </div>
 			    </div>
 		    </div> <!-- end new group modal -->
 		</div> <!-- end NG-CONTROLLER -->

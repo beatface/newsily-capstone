@@ -374,5 +374,24 @@ iframe#modaliFrame {
   padding: 20px; }
 
 /************ COMMENT MODAL **************/
-
+#myModal .modal-dialog,
+#addMembersModal .modal-dialog,
+#joinModal .modal-dialog {
+    width: 65%;
+    height: 50%;
+}
+#myModal .modal-body,
+#addMembersModal .modal-body {
+    border: none;
+    height: 84%;
+}
+#joinModal .modal-body {
+    border: none;
+    height: 90%;
+}
+#myModal .form-control,
+#addMembersModal .form-control,
+#joinModal .form-control {
+    margin-bottom: 7px;
+}
 /*# sourceMappingURL=main.css.map */
