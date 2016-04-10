@@ -1,13 +1,12 @@
 
 app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObject", "groupId", "currentUserData",
 	function($scope, $state, $firebaseArray, $firebaseObject, groupId, currentUserData) {
-	
+
 	$scope.newGroupName = "";
 	$scope.groupId = "";
 
 	// -- new firebase reference at groups location
 	var ref = new Firebase("https://newsily.firebaseio.com/groups");
-	var fbref = $firebaseArray(ref);
 
 	var currentUser = currentUserData.getUserData();
 	console.log("currentUser", currentUser);
@@ -42,7 +41,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		var groupref = new Firebase("https://newsily.firebaseio.com/groups/" + group);
 		console.log("groupref >>>>>>>>", groupref);
 		$scope.addedMembers = [$scope.addMember1, $scope.addMember2, $scope.addMember3];
-		// loop through added members and push to members in firebase 
+		// loop through added members and push to members in firebase
 		$scope.addedMembers.forEach(function(element) {
 			if (element) {
 				groupref.child('members').push(element);
@@ -54,7 +53,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		$state.go("newsily-main.posts");
 	};
 
-	// -- Join an existing from from create-or-join onboarding view 
+	// -- Join an existing from from create-or-join onboarding view
 	$scope.joinGroup = function() {
 		var joinedref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid + "/joined_groups");
 
@@ -64,7 +63,7 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			// check that group exists
 			if ( matched_group !== null && matched_group !== undefined ) {
 				// get group's key
-				var key = _.findKey(matched_group, 'members');	
+				var key = _.findKey(matched_group, 'members');
 				// move one level down in object
 				var obj = matched_group[key];
 				// target members on group to join
@@ -80,12 +79,9 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 					}
 				}
 			} //end if
-			
+
 		});
 	};
 
 
 }]); // end app controller
-
-
-
