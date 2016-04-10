@@ -309,6 +309,7 @@ input[type="radio"]:checked + label {
   column-fill: auto; }
 
 .pin {
+  min-width: 201px;
   display: inline-block;
   background: #FEFEFE;
   border: 2px solid #FAFAFA;
@@ -344,7 +345,7 @@ input[type="radio"]:checked + label {
     -webkit-column-count: 4;
     -moz-column-count: 4;
     column-count: 4; } }
-@media (min-width: 1100px) {
+@media (min-width: 1310px) {
   #columns {
     -webkit-column-count: 5;
     -moz-column-count: 5;
