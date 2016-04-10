@@ -33,7 +33,7 @@ body,
 	margin: 0;
 }
 
-// login and onboarding pages 
+// login and onboarding pages
 #login-header {
     font-family: 'Satisfy', serif;
     color: linen;
@@ -158,8 +158,8 @@ input[type="radio"] + label {
     cursor: pointer;
 }
 
-input[type="radio"]:checked + label{ 
-    background-color: $bright-peach; 
+input[type="radio"]:checked + label{
+    background-color: $bright-peach;
     color: $dark-navy;
 }
 
@@ -333,7 +333,7 @@ input[type="radio"]:checked + label{
 }
 
 .heart-post, // favourite heart on each individual post
-.delete-post { 
+.delete-post {
     cursor: pointer;
 }
 
@@ -361,6 +361,7 @@ input[type="radio"]:checked + label{
 }
 
 .pin {
+    min-width: 201px;
     display: inline-block;
     background: #FEFEFE;
     border: 2px solid #FAFAFA;
@@ -373,7 +374,7 @@ input[type="radio"]:checked + label{
     padding-bottom: 5px;
     background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
     opacity: 1;
-    
+
     -webkit-transition: all .2s ease;
     -moz-transition: all .2s ease;
     -o-transition: all .2s ease;
@@ -403,7 +404,7 @@ input[type="radio"]:checked + label{
     }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1310px) {
     #columns {
         -webkit-column-count: 5;
         -moz-column-count: 5;
@@ -451,13 +452,3 @@ iframe#modaliFrame {
 // .delete-comment {
 //     font-size: .7em;
 // }
-
-
-
-
-
-
-
-
-
-
