@@ -5,10 +5,9 @@ app.controller("profileCtrl", ["$scope", "$state", "currentUserData",
 
 	// ------- SAVE PROFILE INFO ------- //
 	$scope.updateProfile = function() {
-		console.log("you clicked save");
 		var currentUser = currentUserData.getUserData();
 		var ref = new Firebase("https://newsily.firebaseio.com/users/" + currentUser.uid);
-	
+
 		ref.child("firstname").set($scope.firstname);
 		ref.child("lastname").set($scope.lastname);
 		ref.child("username").set($scope.username);

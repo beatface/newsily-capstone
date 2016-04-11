@@ -39,7 +39,7 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
     // getting user's joined groups and setting group factory with first group in the array for inital page view on login
     userGroupsRef.on("value", function(snapshot) {
         var groups = snapshot.val();
-        var key = _.findKey(groups);  
+        var key = _.findKey(groups);
         // move one level down in object
         $scope.currentGroupView = groups[key]; // gives the UID string
 		console.log("inital group to view", $scope.currentGroupView);
@@ -49,7 +49,6 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 	// ------------------ Add post to group page -------------------- //
 	$scope.addPost = function() {
-		console.log("you clicked add post");
 		var now = new Date();
 		// Create an array with the current month, day and time
 		var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
@@ -91,19 +90,18 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	};
 
 
-	// ---------------- CLICK FUNCTIONS ON BODY FOR DYNAMICALLY LOADED MENU ITEMS AND POSTS ---------------- // 
+	// ---------------- CLICK FUNCTIONS ON BODY FOR DYNAMICALLY LOADED MENU ITEMS AND POSTS ---------------- //
 	$('body').click(function(event) {
 		// ----- setting iframe source for modal on click
 		if ($(event.target).hasClass("viewModal")) {
-			console.log("you clicked on a .viewModal element");
 			var modalframe = document.getElementById("modaliFrame");
 			if(modalframe !== null) {
 				if(modalframe.src) {
-					modalframe.src = event.target.id; 
+					modalframe.src = event.target.id;
 				} else if(modalframe.contentWindow !== null && modalframe.contentWindow.location !== null) {
-					modalframe.contentWindow.location = event.target.id; 
-				} else{ 
-					modalframe.setAttribute('src', event.target.id); 
+					modalframe.contentWindow.location = event.target.id;
+				} else{
+					modalframe.setAttribute('src', event.target.id);
 				}
 			}
 		}
@@ -171,7 +169,6 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 	};
 
 	$scope.removeFavourite = function(postId) {
-	    console.log("deleting favourite");
 	    var deletePost = new Firebase("https://newsily.firebaseio.com/posts/" + postId + "/favouritedBy/" + $scope.currentUserId);
 	    deletePost.remove();
 	};
@@ -193,11 +190,10 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 		$scope.currentGroupView = selectedID;
 		groupId.setGroupId(selectedID);
 		$scope.currentgroup = "'" + selectedID + "'";
-		console.log("current view button click ====", $scope.currentgroup);
 	};
 
 
-	// ---------------- LOGOUT BUTTON ---------------- // 
+	// ---------------- LOGOUT BUTTON ---------------- //
 	$scope.logout = function() {
 		userGroupsRef.unauth();
 		$state.go("login");
@@ -206,11 +202,3 @@ app.controller("mainAppCtrl", ["$scope", "$state", "$firebaseArray", "$http", "g
 
 
 }]); // end app controller
-
-
-
-
-
-
-
-

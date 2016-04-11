@@ -19,7 +19,6 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 			groupname: $scope.newGroupName,
 			members: [currentUser.password.email]
 		};
-		console.log("groupObj", groupObj);
 		var newRef = ref.push(groupObj);
 		//set value in factory
 		groupId.setGroupId(newRef.key());
@@ -39,7 +38,6 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 		var group = groupId.getGroupId();
 		// -- new firebase reference at groups location
 		var groupref = new Firebase("https://newsily.firebaseio.com/groups/" + group);
-		console.log("groupref >>>>>>>>", groupref);
 		$scope.addedMembers = [$scope.addMember1, $scope.addMember2, $scope.addMember3];
 		// loop through added members and push to members in firebase
 		$scope.addedMembers.forEach(function(element) {
@@ -68,10 +66,8 @@ app.controller("groupCtrl", ["$scope", "$state", "$firebaseArray", "$firebaseObj
 				var obj = matched_group[key];
 				// target members on group to join
 				for (var member in obj.members) {
-					console.log("this member", obj.members[member]);
 					// find if current user matches authorized group members
 					if ( obj.members[member] === currentUser.password.email ) {
-						console.log("this group matches", obj.members[member], "--", currentUser.password.email);
 						// push joined group key to user's joined_groups
 						joinedref.push(key);
 						//reroute to main view
