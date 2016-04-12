@@ -1,4 +1,4 @@
-body {
+* {
   font-family: Futura, sans-serif; }
 
 .yanone-text {
@@ -111,7 +111,6 @@ body,
   color: #FBC6A2;
   padding: 0;
   position: relative;
-  width: 245px;
   height: 100%; }
 
 /* Sidebar Styles */
@@ -154,6 +153,7 @@ input[type="radio"]:checked + label {
 #newgroupbtn,
 #addmembersbtn,
 #logoutbtn,
+.login-btns,
 .add-comment-div button {
   font-family: 'Open Sans', sans-serif;
   left: 64px;
@@ -375,24 +375,5 @@ iframe#modaliFrame {
   padding: 20px; }
 
 /************ COMMENT MODAL **************/
-#myModal .modal-dialog,
-#addMembersModal .modal-dialog,
-#joinModal .modal-dialog {
-    width: 65%;
-    height: 50%;
-}
-#myModal .modal-body,
-#addMembersModal .modal-body {
-    border: none;
-    height: 84%;
-}
-#joinModal .modal-body {
-    border: none;
-    height: 90%;
-}
-#myModal .form-control,
-#addMembersModal .form-control,
-#joinModal .form-control {
-    margin-bottom: 7px;
-}
+
 /*# sourceMappingURL=main.css.map */
