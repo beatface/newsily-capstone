@@ -130,9 +130,7 @@ body,
 	color: $light-peach;
 	padding: 0;
     position: relative;
-    width: 245px;
     height: 100%;
-    // z-index: 1;
 }
 
 
@@ -184,6 +182,7 @@ input[type="radio"]:checked + label{
 #newgroupbtn,
 #addmembersbtn,
 #logoutbtn,
+.login-btns,
 .add-comment-div button {
     font-family: 'Open Sans', sans-serif;
     left: 64px;

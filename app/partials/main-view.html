@@ -1,6 +1,6 @@
 <div class="row full-height-row">
 	<!-- FIXED SIDEBAR -->
-	<div class="col-md-2 fixed-sidebar">
+	<div class="col-sm-3 col-md-2 fixed-sidebar">
 		<!-- Add Post button trigger modal -->
 		<div class="img-circle" style="background-image: url('{{currentUserProfileData.photo}}')" ng-if="currentUserProfileData.photo"></div>
 	    <button id="addPostBtn" class="btn btn-default" data-toggle="modal" data-target="#myModal">
@@ -93,7 +93,7 @@
 	</div>
 
 	<!-- POSTS CONTAINER -->
-	<div class="col-md-10 posts-div">
+	<div class="col-sm-9 col-md-10 posts-div">
 		<div ui-view></div>
 	</div>
 
